@@ -80,7 +80,7 @@ class BERTClassifier(nn.Module):
 
 
 # 학습 모델 로드
-PATH = 'Model_0616/'
+PATH = 'model/model_server/Model/Model_0616/'
 # 전체 모델을 통째로 불러옴, 클래스 선언 필수
 model = torch.load(PATH + 'Model_0616model12399.pt',
                    map_location='cpu')
