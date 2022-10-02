@@ -9,4 +9,3 @@ model/model_server/.cache/
 model/model_server/__pycache__/
 model/model_server/.ipynb_checkpoints/
 model/model_server/.vscode/
-model/model_server/KoBERT/
