@@ -4,6 +4,13 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
+boto3 = "*"
+gluonnlp = ">=0.6.0"
+mxnet = ">=1.4.0"
+onnxruntime = "==1.8.0"
+sentencepiece = ">=0.1.6"
+torch = ">=1.7.0"
+transformers = ">=4.8.1"
 
 [dev-packages]
 
