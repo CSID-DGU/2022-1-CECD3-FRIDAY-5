@@ -4,7 +4,7 @@
 *.pdf
 *.xlsx
 *.pt
-model/model_server/Model/
+model/model_server/Model/*
 model/model_server/.cache/
 model/model_server/__pycache__/
 model/model_server/.ipynb_checkpoints/
