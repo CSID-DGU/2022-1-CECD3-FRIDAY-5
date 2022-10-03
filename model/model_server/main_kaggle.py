@@ -1,5 +1,6 @@
 from KoBERT.kobert_hf.kobert_tokenizer import KoBERTTokenizer
 from KoBERT.kobert.pytorch_kobert import get_pytorch_kobert_model
+from kiwipiepy import Kiwi
 from model import *
 import json
 from flask import Flask, request, render_template, jsonify
@@ -15,10 +16,10 @@ tokenizer = KoBERTTokenizer.from_pretrained('skt/kobert-base-v1')
 
 
 # 학습 모델 로드
-PATH = 'model/model_server/Model/Model_0616/'
+PATH = 'model/model_server/Model/Kaggle(single label), batch size=64, learning rate=5e-05/'
 # 전체 모델을 통째로 불러옴, 클래스 선언 필수
-model = torch.load(PATH + 'Model_0616model12399.pt', map_location='cpu')
-model.load_state_dict(torch.load(PATH + 'Model_0616model12399_state_dict.pt',
+model = torch.load(PATH + 'Model.pt', map_location='cpu')
+model.load_state_dict(torch.load(PATH + 'Model_state_dict.pt',
                       map_location='cpu'))  # state_dict를 불러 온 후, 모델에 저장
 
 
@@ -50,12 +51,12 @@ def predict(predict_sentence):
 
         out = model(token_ids, valid_length, segment_ids)
 
-        test_eval = []
+        # test_eval = []
         for i in out:
             logits = i
             logits = logits.detach().cpu().numpy()
 
-            return logits.tolist()
+            return np.argmax(logits)
 
 
 app = Flask(__name__)
@@ -66,7 +67,7 @@ def home():
     return render_template('test.html')
 
 
-@app.route('/test', methods=['POST', 'GET'])
+@app.route('/Diary', methods=['POST', 'GET'])
 def interact():
     # sentence = request.form['sentence']
     # result = predict(sentence)
@@ -75,9 +76,25 @@ def interact():
     # }
     # return jsonify(data)
     data = request.json
-    sentence = data['sentence']
-    result = predict(sentence)
+    text = data['Text']
+    kiwi = Kiwi()
+    sent_list = kiwi.split_into_sents(text, return_tokens=False)
 
+    emotion_list = [0 for i in range(7)]
+
+    for sent in sent_list:
+        pred = predict(sent.text)
+        emotion_list[pred] += 1
+
+    response = {
+        'joy': emotion_list[0],
+        'love': emotion_list[1],
+        'sadness': emotion_list[2],
+        'anger': emotion_list[3],
+        'surprise': emotion_list[4],
+        'fear': emotion_list[5],
+        'neutral': emotion_list[6],
+    }
     # for i in range(len(result)):
     #     result[i] = float(result[i])
 
@@ -99,10 +116,10 @@ def interact():
     #     'etc': result[8]
     # }
 
-    response = {
-        '문장': sentence,
-        '결과': result,
-    }
+    # response = {
+    #     '문장': sentence,
+    #     '결과': result,
+    # }
 
     return json.dumps(response), 200
 
