@@ -11,6 +11,8 @@ onnxruntime = "==1.8.0"
 sentencepiece = ">=0.1.6"
 torch = "==1.7.1"
 transformers = "==4.8.1"
+flask = "*"
+kiwipiepy = "*"
 
 [dev-packages]
 

@@ -6,6 +6,8 @@ from torch import nn
 import torch
 from KoBERT.kobert.pytorch_kobert import get_pytorch_kobert_model
 from KoBERT.kobert_hf.kobert_tokenizer import KoBERTTokenizer
+from kiwipiepy import Kiwi
+
 tokenizer = KoBERTTokenizer.from_pretrained('skt/kobert-base-v1')
 bertmodel, vocab = get_pytorch_kobert_model()
 
