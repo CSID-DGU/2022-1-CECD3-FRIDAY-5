@@ -117,34 +117,57 @@ def predict(predict_sentence):
 
         out = model(token_ids, valid_length, segment_ids)
 
-        test_eval = []
+        # test_eval = []
         for i in out:
             logits = i
             logits = logits.detach().cpu().numpy()
 
-            if np.argmax(logits) == 0:
-                test_eval.append("joy")
-            elif np.argmax(logits) == 1:
-                test_eval.append("love")
-            elif np.argmax(logits) == 2:
-                test_eval.append("sadness")
-            elif np.argmax(logits) == 3:
-                test_eval.append("anger")
-            elif np.argmax(logits) == 4:
-                test_eval.append("surprise")
-            elif np.argmax(logits) == 5:
-                test_eval.append("fear")
-            elif np.argmax(logits) == 6:
-                test_eval.append("neutral")
+            # if np.argmax(logits) == 0:
+            #     test_eval.append("joy")
+            # elif np.argmax(logits) == 1:
+            #     test_eval.append("love")
+            # elif np.argmax(logits) == 2:
+            #     test_eval.append("sadness")
+            # elif np.argmax(logits) == 3:
+            #     test_eval.append("anger")
+            # elif np.argmax(logits) == 4:
+            #     test_eval.append("surprise")
+            # elif np.argmax(logits) == 5:
+            #     test_eval.append("fear")
+            # elif np.argmax(logits) == 6:
+            #     test_eval.append("neutral")
 
-        print(test_eval[0])
+            return np.argmax(logits)
 
 
-# 질문 무한반복하기! 0 입력시 종료
-end = 1
-while end == 1:
-    sentence = input("하고싶은 말을 입력해주세요 : ")
-    if sentence == "0":
-        break
-    predict(sentence)
-    print("\n")
+test_sent = """
+나는 즐거움의 감정을 느끼고 있어요. 
+나는 사랑의 감정을 느끼고 있어요. 
+나는 슬픔의 감정을 느끼고 있어요. 
+나는 분노의 감정을 느끼고 있어요. 
+나는 놀람의 감정을 느끼고 있어요. 
+나는 두려움의 감정을 느끼고 있어요.
+나는 중립의 감정을 느끼고 있어요.
+"""
+
+kiwi = Kiwi()
+sent_list = kiwi.split_into_sents(test_sent, return_tokens=False)
+
+emotion_list = [0 for i in range(7)]
+
+for sent in sent_list:
+    pred = predict(sent.text)
+    emotion_list[pred] += 1
+
+
+result = {
+    'joy': emotion_list[0],
+    'love': emotion_list[1],
+    'sadness': emotion_list[2],
+    'anger': emotion_list[3],
+    'surprise': emotion_list[4],
+    'fear': emotion_list[5],
+    'neutral': emotion_list[6],
+}
+
+print(result)
