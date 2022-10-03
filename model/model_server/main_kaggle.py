@@ -86,14 +86,16 @@ def interact():
         pred = predict(sent.text)
         emotion_list[pred] += 1
 
-    response = {
-        'joy': emotion_list[0],
-        'love': emotion_list[1],
-        'sadness': emotion_list[2],
-        'anger': emotion_list[3],
-        'surprise': emotion_list[4],
-        'fear': emotion_list[5],
-        'neutral': emotion_list[6],
+    total = sum(emotion_list)
+
+    result = {
+        'joy': round(emotion_list[0]/total, 4),
+        'love': round(emotion_list[1]/total, 4),
+        'sadness': round(emotion_list[2]/total, 4),
+        'anger': round(emotion_list[3]/total, 4),
+        'surprise': round(emotion_list[4]/total, 4),
+        'fear': round(emotion_list[5]/total, 4),
+        'neutral': round(emotion_list[6]/total, 4),
     }
     # for i in range(len(result)):
     #     result[i] = float(result[i])
