@@ -3,3 +3,9 @@
 *.docx
 *.pdf
 *.xlsx
+*.pt
+model/model_server/Model/*
+.cache/
+model/model_server/__pycache__/
+model/model_server/.ipynb_checkpoints/
+model/model_server/.vscode/
