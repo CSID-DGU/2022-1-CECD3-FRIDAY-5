@@ -16,11 +16,15 @@ tokenizer = KoBERTTokenizer.from_pretrained('skt/kobert-base-v1')
 
 
 # 학습 모델 로드
-PATH = 'model/model_server/Model/Kaggle(single label), batch size=64, learning rate=5e-05/'
+PATH = 'model/model_server/Model/Model_base/'
 # 전체 모델을 통째로 불러옴, 클래스 선언 필수
 model = torch.load(PATH + 'Model.pt', map_location='cpu')
 model.load_state_dict(torch.load(PATH + 'Model_state_dict.pt',
                       map_location='cpu'))  # state_dict를 불러 온 후, 모델에 저장
+
+
+emotion_label = ['neutral', 'happiness', 'sadness',
+                 'angry', 'disgust', 'fear', 'surprise']
 
 
 def softmax(x):
@@ -59,6 +63,14 @@ def predict(predict_sentence):
             return np.argmax(logits)
 
 
+def pair_sent_label(text, label):
+    sent_label_pair = []
+    sent_label_pair.append(text)
+    sent_label_pair.append(emotion_label[label])
+
+    return sent_label_pair
+
+
 app = Flask(__name__)
 
 
@@ -82,22 +94,30 @@ def interact():
 
     emotion_list = [0 for i in range(7)]
 
+    sentence_label_pair = []
+
     for sent in sent_list:
-        pred = predict(sent.text)
+        sentence = sent.text
+        pred = predict(sentence)
         emotion_list[pred] += 1
+        sent_label_pair = pair_sent_label(sentence, pred)
+        sentence_label_pair.append(sent_label_pair)
 
     total = sum(emotion_list)
 
     response = {
-        'sent_list': sent_list,
-        'joy': round(emotion_list[0]/total, 4),
-        'love': round(emotion_list[1]/total, 4),
+        # 'sent_list': sent_list,
+        'neutral': round(emotion_list[0]/total, 4),
+        'happiness': round(emotion_list[1]/total, 4),
         'sadness': round(emotion_list[2]/total, 4),
-        'anger': round(emotion_list[3]/total, 4),
-        'surprise': round(emotion_list[4]/total, 4),
+        'angry': round(emotion_list[3]/total, 4),
+        'disgust': round(emotion_list[4]/total, 4),
         'fear': round(emotion_list[5]/total, 4),
-        'neutral': round(emotion_list[6]/total, 4),
+        'surprise': round(emotion_list[6]/total, 4),
+        'sentence': sentence_label_pair,
     }
+
+    print(response)
     # for i in range(len(result)):
     #     result[i] = float(result[i])
 
@@ -129,4 +149,4 @@ def interact():
 
 if __name__ == '__main__':
     # app.run(host='192.168.35.3', debug=True, port=5000)
-    app.run(host='10.70.19.199', debug=True, port=5000)
+    app.run(host='10.60.3.185', debug=True, port=5000)
