@@ -26,16 +26,11 @@ public class DragAndRotate : MonoBehaviour
                     else
                     {
                         transform.Rotate(transform.up, Vector3.Dot(mPosDelta, Camera.main.transform.right)*0.05f,Space.World);
-
                     }
                     
                     transform.Rotate(Camera.main.transform.right, Vector3.Dot(mPosDelta, Camera.main.transform.up)*0.05f,Space.World);
                 }
             }
-
-
-
-
         }
 
         mPrevPos = Input.mousePosition;
