@@ -32,23 +32,27 @@ public class HttpRequest : MonoBehaviour
         }
         else
         {
-            Debug.Log("error");
+            Debug.Log(www.error);
         }
     }
 
     // 테스트 버튼용
     public void OnPostBtnClick()
     {
-        StartCoroutine(UnityWebRequestPOST());
+        Diary diary = new Diary("test", inputField.text);
+        StartCoroutine(UnityWebRequestPOST(diary));
     }
 
     // POST
-    IEnumerator UnityWebRequestPOST()
+    IEnumerator UnityWebRequestPOST(Diary diary)
     {
         string content = inputField.text;
-        string url = "http://10.70.29.54:5000/Diary";
-        string bodyJsonString = "{ \"Text\": \""+content+"\"}";
+        string url = "http://10.60.17.79:8080/diary_create"; // back
+        // string url = "http://10.60.3.185:5000/Diary"; // model
 
+        string bodyJsonString = JsonUtility.ToJson(diary);
+        Debug.Log(bodyJsonString);
+        
         var request = new UnityWebRequest(url, "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
         request.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
@@ -62,7 +66,7 @@ public class HttpRequest : MonoBehaviour
         }
         else
         {
-            Debug.Log("error");
+            Debug.Log(request.error);
         }
     }
 }
