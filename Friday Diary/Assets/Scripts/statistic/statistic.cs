@@ -22,7 +22,7 @@ public class statistic : MonoBehaviour
         m2 = month2.options[month2.value].text;
         d1 = date1.text;
         d2 = date2.text;
-        show.text = y1+y2+m1+m2+d1+d2;
+        show.text = string.Format("{0} {1} {2} ~ {3} {4} {5}", y1, m1, d1, y2, m2, d2);
 
         // StartCoroutine( UnityWebRequestPOST()); 
     }
