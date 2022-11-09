@@ -89,6 +89,7 @@ def interact():
     # return jsonify(data)
     data = request.json
     text = data['Text']
+    print(f"문장 : {text}")
     kiwi = Kiwi()
     sent_list = kiwi.split_into_sents(text, return_tokens=False)
 
@@ -149,4 +150,4 @@ def interact():
 
 if __name__ == '__main__':
     # app.run(host='192.168.35.3', debug=True, port=5000)
-    app.run(host='10.60.3.185', debug=True, port=5000)
+    app.run(host='10.60.13.191', debug=True, port=5000)
