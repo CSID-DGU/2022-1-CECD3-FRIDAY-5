@@ -19,7 +19,5 @@ public class Diary
             text = text.Replace("\n"," ");
         }
         this.text = text;
-
-
     }
 }
