@@ -3,32 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
+using UnityEngine.Networking;
+using System.Text;
 
+
+[System.Serializable]
+public class Signin  
+{
+    public string id, password,name;
+
+    public Signin(){
+    }
+
+    public Signin(string id, string password, string name)
+    {
+        this.id = id;
+        this.password = password;
+        this.name = name; 
+    }
+}
 public class signCheck : MonoBehaviour
 {
-    public InputField username;
-    public InputField email;
-    public InputField password;
-    public InputField password2;
+    public InputField username, email, password, password2;
     public Button signButton;
-    public Text usernameError;
-    public Text emailError;
-    public Text passwordError; 
-    public Text equalError; 
+    public Text usernameError, emailError, passwordError, equalError; 
 
 
     public void signButtonClick()
     {
         if(usernameCheck( username , usernameError)==true && emailCheck( email, emailError )==true && passwordCheck(password, passwordError)==true && passwordEqual(password,password2,equalError)==true )
         {
-            Debug.Log("회원가입 성공!!!");
-            //UnityWebRequestPOST();
+            Signin newSignin= new Signin(email.text, password.text, username.text);
+            StartCoroutine( UnityWebRequestPOST(newSignin));
+            Debug.Log("회원가입 성공");
 
         }
         else
         {
-            Debug.Log("회원가입 실패ㅠㅠ");
-            // 백엔드 통신 --> 데이터 전송 
+            Debug.Log("회원가입 실패");
         }
     }
 
@@ -100,5 +112,28 @@ public class signCheck : MonoBehaviour
         }
     }
 
+    IEnumerator UnityWebRequestPOST(Signin newSignin)
+    {
+        string url = "http://15.164.6.142:8080/member_create"; //서버주소
+        string bodyJsonString = JsonUtility.ToJson(newSignin);
+        Debug.Log(bodyJsonString);
+
+        var request = new UnityWebRequest(url, "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
+        request.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+        yield return request.SendWebRequest();
+        
+        if (request.error == null)
+        {
+            Debug.Log(request.downloadHandler.text);  
+        }
+        else
+        {
+            Debug.Log(request.error);
+            Debug.Log("error");
+        } 
+    }
 
 }
