@@ -6,30 +6,45 @@ using UnityEngine.UI;
 using System.Text;
 
 
+[System.Serializable]
+public class Login  
+{
+    public string id, password;
+
+    public Login(){
+    }
+
+    public Login(string id, string password)
+    {
+        this.id = id;
+        this.password = password;
+    }
+}
+
 public class login_function : MonoBehaviour
 {
-    public InputField password;
-    public InputField email;
+    public InputField passwordInput, idInput; 
     public Text error; 
 
     public void click()
     {
-        StartCoroutine( UnityWebRequestPOST());      
+        string idST = idInput.text;
+        string passwordST = passwordInput.text;
+        Login newLogin= new Login(idST,passwordST);
+        StartCoroutine( UnityWebRequestPOST(newLogin));      
     }
 
-    IEnumerator UnityWebRequestPOST()
+    IEnumerator UnityWebRequestPOST(Login newLogin)
     {
-        string emailData = email.text;
-        string passwordData = password.text;
-        string bodyJsonString = " { \"ID\": \""+emailData+"\", \"Text\": \""+passwordData+"\"} ";
-        string url = "http://10.70.16.159:8080/diary_create"; //서버주소
+        string url = "http://15.164.6.142:8080/member_read "; //서버주소
+        string bodyJsonString = JsonUtility.ToJson(newLogin);
+        Debug.Log(bodyJsonString);
 
         var request = new UnityWebRequest(url, "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
         request.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
-        
         yield return request.SendWebRequest();
         
         if (request.error == null)
@@ -43,7 +58,6 @@ public class login_function : MonoBehaviour
             Debug.Log("error");
             error.text = " 로그인 정보를 확인해 주세요";
             // 로그인 실패 메세지 출력 
-        }
-        
+        } 
     }
 }
