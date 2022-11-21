@@ -4,67 +4,71 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Text;
+using System;
 
 public class HttpRequest : MonoBehaviour
 {
-
-    public Text inputField;
-
-    // 테스트 버튼용
-    public void OnGetBtnClick()
-    {
-        StartCoroutine(UnityWebRequestGET());
+    public static HttpRequest i;
+    private void Start() {
+        if(i==null) i= this;
     }
 
-    // GEt
-    public IEnumerator UnityWebRequestGET()
+    public void Get<T>(string url, Func<string, T> output)
     {
-        string url = "http://10.70.23.54:5000/Diary";
+        StartCoroutine(UnityWebRequestGET(url, output)) ;
+    }
 
+    // Get
+    private IEnumerator UnityWebRequestGET<T>(string url, Func<string, T> output)
+    {
 		// UnityWebRequest에 내장되있는 GET 메소드를 사용한다.
-        UnityWebRequest www = UnityWebRequest.Get(url);
+        UnityWebRequest request = UnityWebRequest.Get(url);
 
-        yield return www.SendWebRequest();  // 응답이 올때까지 대기한다.
+        yield return request.SendWebRequest();  // 응답이 올때까지 대기한다.
 
-        if (www.error == null)  // 에러가 나지 않으면 동작.
+        if (request.error == null)  // 통신 성공
         {
-            Debug.Log(www.downloadHandler.text);
+            Response res = JsonUtility.FromJson<Response>(request.downloadHandler.text);
+            if(res.message.Contains("fail")){ // 처리 실패
+                Debug.Log(res.message);
+            }
+            else{ // 처리 성공
+                output(res.data);
+            }
         }
-        else
+        else // 통신 실패
         {
-            Debug.Log(www.error);
+            Debug.Log(request.error);
         }
     }
 
-    // 테스트 버튼용
-    public void OnPostBtnClick()
+    public void Post<T>(string url, string jsonString, Func<string, T> output)
     {
-        Diary diary = new Diary("test", inputField.text);
-        StartCoroutine(UnityWebRequestPOST(diary));
+        StartCoroutine(UnityWebRequestPOST(url, jsonString, output));
     }
 
     // POST
-    IEnumerator UnityWebRequestPOST(Diary diary)
-    {
-        string content = inputField.text;
-        string url = "http://10.70.20.181:8080/diary_create"; // back
-        // string url = "http://10.60.3.185:5000/Diary"; // model
-
-        string bodyJsonString = JsonUtility.ToJson(diary);
-        Debug.Log(bodyJsonString);
-        
+    private IEnumerator UnityWebRequestPOST<T>(string url, string jsonString, Func<string, T> output)
+    {   
         var request = new UnityWebRequest(url, "POST");
-        byte[] bodyRaw = Encoding.UTF8.GetBytes(bodyJsonString);
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonString);
         request.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
         yield return request.SendWebRequest();
         
-        if (request.error == null)
+        if (request.error == null) // 통신 성공
         {
-            Debug.Log(request.downloadHandler.text);   
+            Response res = JsonUtility.FromJson<Response>(request.downloadHandler.text);
+             
+            if(res.message.Contains("fail")){ // 처리 실패
+                Debug.Log(res.message);
+            }
+            else{ // 처리 성공
+                output(res.data);
+            }
         }
-        else
+        else // 통신 실패
         {
             Debug.Log(request.error);
         }
