@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using System;
 
 public class Backend : MonoBehaviour
 {
     public static Backend i;
-    enum sub {
+    enum SubUrl {
         member_create,
         member_read,
         member_update,
@@ -24,36 +25,133 @@ public class Backend : MonoBehaviour
     }
 
     private string url = "http://10.70.23.54:5000/";
-
-    private void Start() {
+    private void Awake() {
         if(i==null) i=this;
+        DontDestroyOnLoad(gameObject);
 
     }
 
-    T GetData<T>(string res){
-        return JsonUtility.FromJson<T>(res);
+    // 회원가입
+    public void SignUp(string id, string password, string name, Action<string> onSuccess) {
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("id",id);
+        data.Add("password", password);
+        data.Add("name", name);
+
+        HttpRequest.i.Post<string>(url+SubUrl.member_create.ToString(),DictToJson(data), onSuccess, onFailed);
     }
 
-    public bool SignUp() {
+    // 로그인
+    public void Login(string id, string password, Action<User> onSuccess){
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("id",id);
+        data.Add("password", password);
 
-
-        return true;
+        HttpRequest.i.Post<User>(url+SubUrl.member_read.ToString(),DictToJson(data), onSuccess, onFailed);
     }
 
-    public bool Login(string id, string password){
-        // 보낼 json string
-        Dictionary<string, string> login = new Dictionary<string, string>();
-        login.Add("id",id);
-        login.Add("password", password);
+    // 유저 갱신 임시
+    public void UpdateUserInfo(UserInfo field, string newData, Action<string> onSuccess){
+        User user = GameManager.i.GetUser();
 
-        // 통신 response를 user에 저장
-        User user = null;
-        HttpRequest.i.Post(url+sub.member_read.ToString(),DictToJson(login), GetData => user );
-        
-        if(user==null){
-            return false;
+        if(user==null) {
+            onFailed("유저가 존재하지 않음");
         }
-        return true;
+
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("id",user.GetId());
+        data.Add("password", user.GetPassword());
+        data.Add(field.ToString(), newData);
+
+        HttpRequest.i.Post<string>(url+SubUrl.member_update.ToString(),DictToJson(data), onSuccess, onFailed);
+    }
+
+    // 회원 탈퇴
+    public void DeleteUser(Action<string> onSuccess){
+        User user = GameManager.i.GetUser();
+
+        if(user==null) {
+            onFailed("유저가 존재하지 않음");
+        }
+
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("id",user.GetId());
+        data.Add("password", user.GetPassword());
+        
+        HttpRequest.i.Post<string>(url+SubUrl.member_delete.ToString(), DictToJson(data), onSuccess, onFailed);
+    }
+
+    // 일기 등록
+    // \n -> \n\n으로 변환하는 거는 호출부에서
+    public void CreateDiary(string id, string text, Action<DiaryResult> onSuccess){
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("id",GameManager.i.GetUser().GetId());
+        data.Add("text", text);
+
+        HttpRequest.i.Post<DiaryResult>(url+SubUrl.diary_create.ToString(), DictToJson(data), onSuccess, onFailed);
+    }
+
+    // 일기 읽기
+    public void ReadDiary(string id, string targetDate, Action<Diary> onSuccess){
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("id",GameManager.i.GetUser().GetId());
+        data.Add("targetdate", targetDate);
+
+        HttpRequest.i.Post<Diary>(url+SubUrl.diary_read.ToString(), DictToJson(data), onSuccess, onFailed);
+    }
+
+    // 일기 갱신
+    public void UpdateDiary(string id, string text, string targetDate, Action<DiaryResult> onSuccess){
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("id", GameManager.i.GetUser().GetId());
+        data.Add("text", text);
+        data.Add("targetdate", targetDate);
+
+        HttpRequest.i.Post<DiaryResult>(url+SubUrl.diary_update.ToString(), DictToJson(data), onSuccess, onFailed);
+    }
+
+    // 일기 삭제
+    public void DeleteDiary(string id, string targetDate, Action<string> onSuccess){
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("id",GameManager.i.GetUser().GetId());
+        data.Add("targetdate", targetDate);
+
+        HttpRequest.i.Post<string>(url+SubUrl.diary_delete.ToString(), DictToJson(data), onSuccess, onFailed);
+    }
+
+    /*
+    // 나무 구매
+    public void CreateObject(Action<> onSuccess){
+        
+    }
+
+    // 나무 갱신
+    public void UpdateObject(Action<> onSuccess){
+        
+    }
+
+    // 나무 삭제
+    public void DeleteObject(Action<> onSuccess){
+
+    }
+
+    // 회원 나무 전부 조회
+    public void ReadAllObjects(Action<> onSuccess){
+
+    }
+   
+
+    // 통계 읽기
+    public void ReadStatistics(Action<> onSuccesss){
+
+    }
+    */
+
+
+
+    public void onFailed(string message){
+        UIPopUp.i.SetText("ERROR", message);
+        UIPopUp.i.Show();
     }
 
     public string DictToJson<T>(Dictionary<string,T> dict){

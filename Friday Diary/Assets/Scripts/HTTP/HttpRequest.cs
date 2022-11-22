@@ -9,17 +9,18 @@ using System;
 public class HttpRequest : MonoBehaviour
 {
     public static HttpRequest i;
-    private void Start() {
-        if(i==null) i= this;
+    
+    private void Awake() {
+        if(i==null) i=this;
     }
 
-    public void Get<T>(string url, Func<string, T> output)
+    public void Get<T>(string url, Action<T> onSuccess, Action<string> onFailed)
     {
-        StartCoroutine(UnityWebRequestGET(url, output)) ;
+        StartCoroutine(UnityWebRequestGET(url, onSuccess, onFailed)) ;
     }
 
     // Get
-    private IEnumerator UnityWebRequestGET<T>(string url, Func<string, T> output)
+    private IEnumerator UnityWebRequestGET<T>(string url, Action<T> onSuccess, Action<string> onFailed)
     {
 		// UnityWebRequest에 내장되있는 GET 메소드를 사용한다.
         UnityWebRequest request = UnityWebRequest.Get(url);
@@ -28,27 +29,28 @@ public class HttpRequest : MonoBehaviour
 
         if (request.error == null)  // 통신 성공
         {
-            Response res = JsonUtility.FromJson<Response>(request.downloadHandler.text);
+            Response<T> res = JsonUtility.FromJson<Response<T>>(request.downloadHandler.text);
             if(res.message.Contains("fail")){ // 처리 실패
-                Debug.Log(res.message);
+                onFailed?.Invoke(res.message);
             }
             else{ // 처리 성공
-                output(res.data);
+                onSuccess?.Invoke(res.data);
             }
         }
         else // 통신 실패
         {
-            Debug.Log(request.error);
+            onFailed?.Invoke(request.error);
+            // Debug.Log(request.error);
         }
     }
 
-    public void Post<T>(string url, string jsonString, Func<string, T> output)
+    public void Post<T>(string url, string jsonString, Action<T> onSuccess,  Action<string> onFailed)
     {
-        StartCoroutine(UnityWebRequestPOST(url, jsonString, output));
+        StartCoroutine(UnityWebRequestPOST(url, jsonString, onSuccess, onFailed));
     }
 
     // POST
-    private IEnumerator UnityWebRequestPOST<T>(string url, string jsonString, Func<string, T> output)
+    private IEnumerator UnityWebRequestPOST<T>(string url, string jsonString, Action<T> onSuccess, Action<string> onFailed)
     {   
         var request = new UnityWebRequest(url, "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonString);
@@ -59,18 +61,19 @@ public class HttpRequest : MonoBehaviour
         
         if (request.error == null) // 통신 성공
         {
-            Response res = JsonUtility.FromJson<Response>(request.downloadHandler.text);
+            Response<T> res = JsonUtility.FromJson<Response<T>>(request.downloadHandler.text);
              
             if(res.message.Contains("fail")){ // 처리 실패
-                Debug.Log(res.message);
+                onFailed?.Invoke(res.message);
             }
             else{ // 처리 성공
-                output(res.data);
+                onSuccess?.Invoke(res.data);
             }
         }
         else // 통신 실패
         {
-            Debug.Log(request.error);
+            onFailed?.Invoke(request.error);
+            // Debug.Log(request.error);
         }
     }
 }
