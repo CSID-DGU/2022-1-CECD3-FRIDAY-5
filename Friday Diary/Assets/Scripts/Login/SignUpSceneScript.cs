@@ -9,17 +9,21 @@ using System.Text;
 
 public class SignUpSceneScript : MonoBehaviour
 {
-    public InputField username, email, password, password2;
-    public Button signButton;
-    public Text usernameError, emailError, passwordError, equalError; 
+    [SerializeField]
+    private InputField username, email, password, password2;
 
-    public void LoadsigninScene (){
-        SceneManager.LoadScene("signin");
-    }
+    [SerializeField]
+    private Text usernameError, emailError, passwordError, equalError; 
+
+    [SerializeField]
+    private GameObject userIcon, emailIcon, pwIcon, eqIcon;
+
+    private bool isNameValid, isEmailValid, isPwValid, isPwEqual;
+
 
     public void signButtonClick()
     {
-        if(usernameCheck( username , usernameError)==true && emailCheck( email, emailError )==true && passwordCheck(password, passwordError)==true && passwordEqual(password,password2,equalError)==true )
+        if(isNameValid && isEmailValid && isPwValid && isPwEqual)
         {
             Backend.i.SignUp(email.text, password.text, username.text, onSignUpSuccess);
         }
@@ -29,57 +33,48 @@ public class SignUpSceneScript : MonoBehaviour
 
     }
 
-    public bool usernameCheck( InputField username, Text usernameError )
+    public void usernameCheck()
     {
         Regex regex = new System.Text.RegularExpressions.Regex(@"^[a-zA-Z]{6,10}$");
  
-        bool ismatch = regex.IsMatch( username.text);  //비교 문자열이 정규식에 맞는지 체크
+        bool ismatch = regex.IsMatch(username.text);  //비교 문자열이 정규식에 맞는지 체크
  
         if (!ismatch)
         {
             usernameError.text = "닉네임 입력 형식을 확인해 주세요";
-            return false;
+            isNameValid = false;
+            userIcon.SetActive(false);
         }
         else
         {
             usernameError.text = " ";
-            return true;
+            isNameValid= true;
+            userIcon.SetActive(true);
         }
     }
      
-   public bool passwordEqual( InputField password, InputField password2 , Text equalError)
-    {
-         if(password.text == password2.text)
-        {
-            equalError.text = " ";
-            return true; 
-        }
-        else
-        {
-            equalError.text = "비밀번호가 일치하지 않습니다";
-            return false;
-        }       
-    }
 
-    public bool emailCheck( InputField email , Text emailError)
+    public void emailCheck()
     {
         Regex regex = new System.Text.RegularExpressions.Regex(@"^[a-zA-Z0-9+-_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
  
-        bool ismatch = regex.IsMatch( email.text);  //비교 문자열이 정규식에 맞는지 체크
+        bool ismatch = regex.IsMatch(email.text);  //비교 문자열이 정규식에 맞는지 체크
  
         if (!ismatch)
         {
             emailError.text = "이메일 입력 형식을 확인해 주세요";
-            return false;
+            isEmailValid = false;
+            emailIcon.SetActive(false);
         }
         else
         {
             emailError.text = " ";
-            return true;
+            isEmailValid = true;
+            emailIcon.SetActive(true);
         }
     }
 
-    public bool passwordCheck( InputField password, Text passwordError )
+    public void passwordCheck()
     {
         Regex regex = new System.Text.RegularExpressions.Regex(@"^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{7,}$");
  
@@ -88,13 +83,32 @@ public class SignUpSceneScript : MonoBehaviour
         if (!ismatch)
         {
             passwordError.text = "비밀번호 입력 형식을 확인해 주세요";
-            return false;
+            isPwValid = false;
+            pwIcon.SetActive(false);
         }
         else
         {
             passwordError.text = " ";
-            return true;
+            isPwValid = true;
+            pwIcon.SetActive(true);
         }
+    }
+
+    
+   public void passwordEqual()
+    {
+         if(password.text == password2.text)
+        {
+            equalError.text = " ";
+            isPwEqual = true;
+            eqIcon.SetActive(true);
+        }
+        else
+        {
+            equalError.text = "비밀번호가 일치하지 않습니다";
+            isPwEqual = false;
+            eqIcon.SetActive(false);
+        }       
     }
 
 }
