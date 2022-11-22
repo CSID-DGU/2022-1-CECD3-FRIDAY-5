@@ -23,6 +23,12 @@ public class SignUpSceneScript : MonoBehaviour
 
     public void signButtonClick()
     {
+        usernameCheck();
+        emailCheck();
+        passwordCheck();
+        passwordEqual();
+
+
         if(isNameValid && isEmailValid && isPwValid && isPwEqual)
         {
             Backend.i.SignUp(email.text, password.text, username.text, onSignUpSuccess);
@@ -30,7 +36,12 @@ public class SignUpSceneScript : MonoBehaviour
     }
 
     public void onSignUpSuccess(string message){
+        UIPopUp.i.SetText(message, "가입에 성공했습니다. \n로그인해주세요.");
+        UIPopUp.i.Show();
+    }
 
+    public void LoadInitializeScene(){
+        SceneManager.LoadScene("login");
     }
 
     public void usernameCheck()
@@ -45,12 +56,24 @@ public class SignUpSceneScript : MonoBehaviour
             isNameValid = false;
             userIcon.SetActive(false);
         }
-        else
+        else // 닉네임 중복확인 필요
         {
             usernameError.text = " ";
             isNameValid= true;
             userIcon.SetActive(true);
         }
+    }
+
+    
+    public void EmailVerifySuccess(string res){
+        emailError.text = " ";
+        isEmailValid = true;
+        emailIcon.SetActive(true);
+    } 
+    public void EmailVerifyFailed(string res){
+        emailError.text = " 사용할 수 없는 이메일입니다.";
+        isEmailValid = false;
+        emailIcon.SetActive(false);
     }
      
 
@@ -68,9 +91,7 @@ public class SignUpSceneScript : MonoBehaviour
         }
         else
         {
-            emailError.text = " ";
-            isEmailValid = true;
-            emailIcon.SetActive(true);
+            Backend.i.CheckValidEmail(email.text, EmailVerifySuccess, EmailVerifyFailed);
         }
     }
 

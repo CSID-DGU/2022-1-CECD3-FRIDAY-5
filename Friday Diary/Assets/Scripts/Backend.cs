@@ -50,6 +50,14 @@ public class Backend : MonoBehaviour
         HttpRequest.i.Post<User>(url+SubUrl.member_read.ToString(),DictToJson(data), onSuccess, onFailed);
     }
 
+    // 닉네임 중복확인
+    public void CheckValidEmail(string id, Action<string> onSuccess, Action<string> onFailed){
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("id",id);
+
+        HttpRequest.i.Post<string>(url+SubUrl.member_read.ToString(),DictToJson(data), onSuccess, onFailed);
+    }
+
     // 유저 갱신 임시
     public void UpdateUserInfo(UserInfo field, string newData, Action<string> onSuccess){
         User user = GameManager.i.GetUser();

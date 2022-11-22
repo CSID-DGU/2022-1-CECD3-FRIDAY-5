@@ -44,6 +44,7 @@ public class HttpRequest : MonoBehaviour
         }
     }
 
+
     public void Post<T>(string url, string jsonString, Action<T> onSuccess,  Action<string> onFailed)
     {
         StartCoroutine(UnityWebRequestPOST(url, jsonString, onSuccess, onFailed));
