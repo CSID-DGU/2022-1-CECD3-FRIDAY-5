@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 225dfd53c58e30a4f95a36050af4c373
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - IM_Hyemin
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 208f08865acd3294592b2793543e3320, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

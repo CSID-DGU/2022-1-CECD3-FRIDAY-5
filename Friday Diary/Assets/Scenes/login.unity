@@ -1685,8 +1685,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2eb37743d5f046f4884fe4263df3409c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  passwordInput: {fileID: 588146674}
-  idInput: {fileID: 112968525}
+  passwordInput: {fileID: 1237522280}
+  idInput: {fileID: 1085778243}
 --- !u!4 &1313503044
 Transform:
   m_ObjectHideFlags: 0
