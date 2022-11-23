@@ -10,15 +10,18 @@ public class UIPopUp : MonoBehaviour
     [SerializeField]
     GameObject popup;
 
+    [SerializeField]
     Text title;
+
+    [SerializeField]
     Text content;
 
 
     private void Start() {
         if(i==null) i = this;
 
-        title = popup.transform.GetChild(1).GetComponent<Text>();
-        content = popup.transform.GetChild(2).GetComponent<Text>();
+        // title = popup.transform.GetChild(1).GetComponent<Text>();
+        // content = popup.transform.GetChild(2).GetComponent<Text>();
     }
 
 
@@ -31,7 +34,7 @@ public class UIPopUp : MonoBehaviour
         popup?.SetActive(true);
     }
 
-    public void OnBtnClick(){
+    public void Close(){
         popup?.SetActive(false);
     }
 }
