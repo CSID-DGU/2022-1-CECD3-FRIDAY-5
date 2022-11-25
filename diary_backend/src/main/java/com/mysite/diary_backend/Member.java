@@ -1,13 +1,10 @@
-package com.mysite.sbb;
+package com.mysite.diary_backend;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
@@ -50,13 +47,13 @@ public class Member {
     @Column()
     private Double neutralmoney;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "member", cascade = {CascadeType.REMOVE, CascadeType.REFRESH})
     private List<Diary> diaryList;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "member", cascade = {CascadeType.REMOVE, CascadeType.REFRESH})
     private List<Friend> friendList;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "member", cascade = {CascadeType.REMOVE, CascadeType.REFRESH})
     private List<Tree> treeList;
 
 }

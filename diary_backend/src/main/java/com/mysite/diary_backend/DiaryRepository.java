@@ -1,4 +1,4 @@
-package com.mysite.sbb;
+package com.mysite.diary_backend;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

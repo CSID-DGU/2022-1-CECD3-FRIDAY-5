@@ -1,7 +1,4 @@
-package com.mysite.sbb;
-
-import java.time.LocalDateTime;
-import java.util.List;
+package com.mysite.diary_backend;
 
 import javax.persistence.*;
 
@@ -13,7 +10,8 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Tree {
     @Id
-    private String treeid;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private Integer treeid;
 
     @ManyToOne
     private Member member;

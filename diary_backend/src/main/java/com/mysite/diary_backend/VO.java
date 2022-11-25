@@ -1,8 +1,7 @@
-package com.mysite.sbb;
+package com.mysite.diary_backend;
 
 import lombok.*;
 
-import javax.persistence.Column;
 import java.time.LocalDateTime;
 
 @Getter
@@ -43,15 +42,23 @@ public class VO
     private String train_sentiment="default";
 
 
-    private String treeid="default";
+    private Integer treeid=-1;
     private String treename="default";
     private Double positionx=-1.0;
     private Double positiony=-1.0;
     private Double positionz=-1.0;
 
+    private String cost_sentiment="default";
+    private Double cost_quantity=-1.0;
     private String reader="default";
     private String date_start="default";
     private String date_end="default";
     private Integer sum=-1;
     private String message="default";
+
+    private Double old_positionx=-1.0;
+    private Double old_positiony=-1.0;
+    private Double old_positionz=-1.0;
+
+
 }
