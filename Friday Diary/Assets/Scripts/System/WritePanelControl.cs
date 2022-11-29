@@ -51,6 +51,7 @@ public class WritePanelControl : MonoBehaviour
     public void OnSubmitBtnClick(){
         if (GameManager.i.GetUser() != null && diaryInput.text != "") {
             string content = diaryInput.text;
+            content = content.Replace("\n","\n\n");
             SetDiaryOfTheDay(content);
             Backend.i.CreateDiary(GameManager.i.GetUser().GetId(), content, OnSubmitSuccess);
         }
@@ -71,25 +72,25 @@ public class WritePanelControl : MonoBehaviour
             StatOfTheDay.text = "오늘 하루는 \n";
             if(result.happiness > 0){
                 
-                StatOfTheDay.text += string.Format("<color={0}>행복</color>이 <color={1}>{2}%</color>\n", MyColor.happiness, MyColor.happiness, Math.Round(result.happiness*100,1));
+                StatOfTheDay.text += string.Format("<color={0}>행복</color>이 <color={1}>{2} 포인트</color>\n", MyColor.happiness, MyColor.happiness, Math.Round(result.happiness*100,1));
             }
             if(result.sadness > 0){
-                StatOfTheDay.text +=  string.Format("<color={0}>슬픔</color>이 <color={1}>{2}%</color>\n", MyColor.sadness,MyColor.sadness, Math.Round(result.sadness*100,1));
+                StatOfTheDay.text +=  string.Format("<color={0}>슬픔</color>이 <color={1}>{2} 포인트</color>\n", MyColor.sadness,MyColor.sadness, Math.Round(result.sadness*100,1));
 
             }
             if(result.angry > 0){
-                StatOfTheDay.text +=  string.Format("<color={0}>분노</color>가 <color={1}>{2}%</color>\n", MyColor.angry,MyColor.angry, Math.Round(result.angry*100,1));
+                StatOfTheDay.text +=  string.Format("<color={0}>분노</color>가 <color={1}>{2} 포인트</color>\n", MyColor.angry,MyColor.angry, Math.Round(result.angry*100,1));
 
             }
             if(result.disgust > 0){
-                StatOfTheDay.text +=  string.Format("<color={0}>혐오</color>가 <color={1}>{2}%</color>\n", MyColor.disgust,MyColor.disgust, Math.Round(result.disgust*100,1));
+                StatOfTheDay.text +=  string.Format("<color={0}>혐오</color>가 <color={1}>{2} 포인트</color>\n", MyColor.disgust,MyColor.disgust, Math.Round(result.disgust*100,1));
 
             }
             if(result.surprise > 0){
-                StatOfTheDay.text +=  string.Format("<color={0}>놀람</color>이 <color={1}>{2}%</color>\n",MyColor.surprise, MyColor.surprise, Math.Round(result.surprise*100,1));
+                StatOfTheDay.text +=  string.Format("<color={0}>놀람</color>이 <color={1}>{2} 포인트</color>\n",MyColor.surprise, MyColor.surprise, Math.Round(result.surprise*100,1));
             }
             if(result.fear > 0){
-                StatOfTheDay.text +=  string.Format("<color={0}>공포</color>가 <color={1}>{2}%</color>\n", MyColor.fear, MyColor.fear, Math.Round(result.fear*100,1));
+                StatOfTheDay.text +=  string.Format("<color={0}>공포</color>가 <color={1}>{2} 포인트</color>\n", MyColor.fear, MyColor.fear, Math.Round(result.fear*100,1));
             }
             StatOfTheDay.text += "만큼 있었네요!";
         }

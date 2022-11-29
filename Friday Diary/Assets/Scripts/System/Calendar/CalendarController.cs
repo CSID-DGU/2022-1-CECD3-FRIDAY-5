@@ -54,6 +54,7 @@ public class CalendarController : MonoBehaviour
         for (int i = 0; i < _totalDateNum; i++)
         {
             Text label = _dateItems[i].GetComponentInChildren<Text>();
+            Image checkImg = _dateItems[i].GetComponentsInChildren<Image>(true)[1];
             // _dateItems[i].SetActive(false);
 
             if (i >= index && i < index + lastDay)
@@ -65,12 +66,57 @@ public class CalendarController : MonoBehaviour
 
                     _dateItems[i].GetComponent<Image>().enabled = true;
                     _dateItems[i].GetComponent<Button>().enabled = true;
+
+                    string targetDate = String.Format("{0}{1:D2}{2:D2}",thatDay.Year, thatDay.Month, date+1);
+                    if(GameManager.i.GetUser() != null){
+                        
+                        Backend.i.ReadDiary(GameManager.i.GetUser().GetId(), targetDate, (res)=>{
+                            if(!res.hasText()){
+                                return;
+                            }
+
+                            EmotionLabel em = res.GetMaxEmotionType();
+                            Debug.Log(String.Format("targetDate : {0} [{1}] {2}", targetDate,res.text, em.ToString()));
+                            Color color;
+
+                            // _dateItems[i].transform.GetChild(1).gameObject.SetActive(true);
+                            checkImg.enabled=true;
+                            
+                            switch(em){
+                                case EmotionLabel.happiness:
+                                     ColorUtility.TryParseHtmlString(MyColor.happiness, out color);
+                                    checkImg.color = color;
+                                break;
+                                case EmotionLabel.sadness:
+                                   ColorUtility.TryParseHtmlString(MyColor.sadness, out color);
+                                    checkImg.color = color;
+                                break;
+                                case EmotionLabel.disgust:
+                                    ColorUtility.TryParseHtmlString(MyColor.disgust, out color);
+                                    checkImg.color = color;                                
+                                break;
+                                case EmotionLabel.angry:
+                                    ColorUtility.TryParseHtmlString(MyColor.angry, out color);
+                                    checkImg.color = color;                                
+                                    break;
+                                case EmotionLabel.surprise:
+                                    ColorUtility.TryParseHtmlString(MyColor.surprise, out color);
+                                    checkImg.color = color;                                
+                                    break;
+                                case EmotionLabel.fear:
+                                    ColorUtility.TryParseHtmlString(MyColor.fear, out color);
+                                    checkImg.color = color;                               
+                                     break;
+                            }
+                        });
+                    }
                     label.text = (date + 1).ToString();
                     date++;
                 }
             }
             else
             {
+                _dateItems[i].transform.GetChild(1).gameObject.SetActive(false);
                 _dateItems[i].GetComponent<Image>().enabled = false;
                 _dateItems[i].GetComponent<Button>().enabled = false;
                 label.text = "";

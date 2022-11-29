@@ -13,6 +13,47 @@ public class Diary
     public void InitDiaryResult(){
         diaryResult = new DiaryResult(this.happiness, this.sadness, this.disgust, this.angry, this.surprise, this.fear, this.neutral);
     }
+
+    public bool hasText(){
+        if(text == null || text == ""){
+            return false;
+        }
+        return true;
+    }
+
+    public EmotionLabel GetMaxEmotionType(){
+        EmotionLabel res = EmotionLabel.happiness;
+        double maxVal = happiness;
+
+        if(sadness > maxVal){
+            maxVal=sadness;
+            res = EmotionLabel.sadness;
+        }
+        if(disgust > maxVal){
+            maxVal=disgust;
+            res = EmotionLabel.disgust;
+        }
+
+
+        if(angry > maxVal){
+            maxVal=angry;
+            res = EmotionLabel.angry;
+        }
+
+
+        if(surprise > maxVal){
+            maxVal=surprise;
+            res = EmotionLabel.surprise;
+        }
+
+
+        if(fear > maxVal){
+            maxVal=fear;
+            res = EmotionLabel.fear;
+        }
+
+        return res;
+    }
 }
 
 [System.Serializable]
@@ -28,4 +69,14 @@ public class DiaryResult{
         this.fear = fear;
         this.neutral = neutral;
     }
+}
+
+public enum EmotionLabel{
+    happiness,
+    sadness,
+    disgust,
+    angry,
+    surprise,
+    fear,
+    none
 }
