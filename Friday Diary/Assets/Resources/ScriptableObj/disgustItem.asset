@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50be6d67640f944428182400325d4e9e, type: 3}
+  m_Name: disgustItem
+  m_EditorClassIdentifier: 
+  collectionName: disgust
+  prefabs:
+  - {fileID: 241548845832806094, guid: 6da211472136bd349a0f76f6ccfc864e, type: 3}
+  - {fileID: 797039302307696222, guid: fa9507adcfed79d449043c6be3921116, type: 3}
+  - {fileID: 1094670882218529017, guid: c24db54c06e48224683f0650143e61ea, type: 3}
+  - {fileID: 4330494248403579601, guid: 2dcc68f39e0d2a5468c7981895182389, type: 3}
+  - {fileID: 5078553595464977730, guid: 68ca4d8a83b5186478f3953c81763d63, type: 3}
+  - {fileID: 8111799783833477364, guid: b03887bc3db86a547a9e6bd1e285fe5c, type: 3}
+  - {fileID: 7257278517172103036, guid: c1a4fdbbdac8a4c41b0a91fa467352a9, type: 3}
+  - {fileID: 7373192115277770303, guid: a2aeb5c54ea41d948a952fac9a4baef7, type: 3}
+  - {fileID: 343621859809226233, guid: 455d95837ee92ac45971182316de226b, type: 3}
+  - {fileID: 9062088558079969466, guid: 5173dbc96f2d4264db9fc517e243ce5c, type: 3}
+  - {fileID: 8820428108097083473, guid: 2232f1118580bd848a43c27902c24c9d, type: 3}
+  - {fileID: 4236117518110622303, guid: ea5023074e31336459c075aa171114e9, type: 3}

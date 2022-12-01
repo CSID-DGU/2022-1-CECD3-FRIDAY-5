@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50be6d67640f944428182400325d4e9e, type: 3}
+  m_Name: fearItem
+  m_EditorClassIdentifier: 
+  collectionName: fear
+  prefabs:
+  - {fileID: 3182957134252409781, guid: da52891924d2bac46a4456cc912dbaa4, type: 3}
+  - {fileID: 108453090784814006, guid: f8660f830d51cc4468f404a134434ec3, type: 3}
+  - {fileID: 3189445881932246379, guid: e95635e4a79bcf64290166db24c03829, type: 3}
+  - {fileID: 7190360589734325297, guid: 56f03e84adadbca4bbcd679ce153dbf1, type: 3}
+  - {fileID: 2294472186163215881, guid: 2c96dca0eeeeb9b4aae49ee26648556d, type: 3}
+  - {fileID: 4684858181186700187, guid: 63bbc149d9ff6a54abe2024dadf380ef, type: 3}
+  - {fileID: 1680116961704817660, guid: cd65b8a0bf194e1419bd34f89cda7b33, type: 3}
+  - {fileID: 3101031193015593897, guid: 3f8830d25a9036f47bd60ecd47362c58, type: 3}
+  - {fileID: 2033150073755076541, guid: 90a3698fd90322d47aa983369f0dd004, type: 3}
+  - {fileID: 6433991007932215180, guid: ab98f3b5eaba0f249a6d4ee2931df907, type: 3}
+  - {fileID: 5855287029101846425, guid: 7412d98b9ca64c4478deabb51c5a00c3, type: 3}
+  - {fileID: 4065662314295249686, guid: bf72a0ccfe8750f4eb4e37f09dc61f26, type: 3}

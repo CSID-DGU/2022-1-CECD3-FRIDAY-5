@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50be6d67640f944428182400325d4e9e, type: 3}
+  m_Name: happinessItem
+  m_EditorClassIdentifier: 
+  collectionName: happiness
+  prefabs:
+  - {fileID: 3706277072803009195, guid: 8307d63a1e89059439be7318e6762dd6, type: 3}
+  - {fileID: 4556044224088418600, guid: 7941371a88a3b684dad82b1f16e26bd2, type: 3}
+  - {fileID: 1329229006132038308, guid: 566a9b552f5979440a3336bc5a4f7e90, type: 3}
+  - {fileID: 2584120891313156182, guid: 37e319d8f71c27849ba1409f1325c4ee, type: 3}
+  - {fileID: 8399649894406187913, guid: e2c96d1e8d7b45a4aaad89f1060a951b, type: 3}
+  - {fileID: 2356012464567220758, guid: be7af62bd3a2a7d4ea10cbddbf0ff5d7, type: 3}
+  - {fileID: 4520425160598062119, guid: dfb447404f61e6243a2d0c63d2e1f858, type: 3}
+  - {fileID: 1451704662641797332, guid: 292081592e22d2949a5ed633c55d9e02, type: 3}
+  - {fileID: 7234902633349297791, guid: 36a174f06b286494e9445aae5d4244a6, type: 3}
+  - {fileID: 5213706646479258814, guid: c73b7511a6f65dc4c867b08089a0f780, type: 3}
+  - {fileID: 5364671922735988026, guid: 136b8e0b338411e46addcbeb9680800d, type: 3}
+  - {fileID: 8927144188969367391, guid: ce287da69cac3db45943531854d4148e, type: 3}

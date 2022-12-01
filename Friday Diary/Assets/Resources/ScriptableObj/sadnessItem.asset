@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50be6d67640f944428182400325d4e9e, type: 3}
+  m_Name: sadnessItem
+  m_EditorClassIdentifier: 
+  collectionName: sadness
+  prefabs:
+  - {fileID: 6354511661643555367, guid: 08f13b71ee217024ba7676fabafbf856, type: 3}
+  - {fileID: 8570134849696760876, guid: 5bb8fdb52f2dcc34192cad0c80f6ee15, type: 3}
+  - {fileID: 1935282489039242903, guid: e0fbbcaf36a7f5f49bc88daa3dd2ec24, type: 3}
+  - {fileID: 701190621834554255, guid: 129de2a3ca08a82479003dd0f58b5e86, type: 3}
+  - {fileID: 2265138268744038045, guid: 3ec7d772a54a61d40bb7d0fdf8458b7c, type: 3}
+  - {fileID: 641784687369739462, guid: 04cad80fa248ef449a2d3f892cca30fc, type: 3}
+  - {fileID: 6740637381369223489, guid: 0c7b745c42cec58479b070cc24513e42, type: 3}
+  - {fileID: 4886732126389223117, guid: 45a1df289dc70394890e4144eed09090, type: 3}
+  - {fileID: 571388351921811022, guid: 0606a0dc41368814294b10a0f27a8e90, type: 3}
+  - {fileID: 3488116226537957680, guid: 9d7f2b37111e84c478c8737e2a543797, type: 3}
+  - {fileID: 1406791726778231140, guid: 22e1fa477e1f8c041abe2c17260c9251, type: 3}
+  - {fileID: 7288171154000027865, guid: 7babd4fe74db85b46981d85954796ac0, type: 3}
