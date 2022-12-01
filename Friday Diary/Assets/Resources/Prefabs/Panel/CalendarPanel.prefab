@@ -415,7 +415,8 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 6347594285346898020}
   m_Father: {fileID: 6347594286835679689}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -880,7 +881,7 @@ RectTransform:
   - {fileID: 6347594286925257646}
   - {fileID: 6347594285625163503}
   m_Father: {fileID: 6347594286835679689}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -912,18 +913,18 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6347594285346898019}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2547696802315807732}
-  m_Father: {fileID: 6347594286835679689}
-  m_RootOrder: 1
+  m_Father: {fileID: 2547696801931140762}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000027418, y: -0.000045776}
-  m_SizeDelta: {x: 1080, y: 791.28}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -160.72998}
+  m_SizeDelta: {x: 0, y: -321.46}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6347594285346898021
 MonoBehaviour:
@@ -938,15 +939,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 20
-    m_Right: 20
+    m_Left: 0
+    m_Right: 0
     m_Top: 10
     m_Bottom: 10
   m_ChildAlignment: 0
   m_StartCorner: 0
   m_StartAxis: 0
   m_CellSize: {x: 146, y: 180}
-  m_Spacing: {x: 0, y: 5}
+  m_Spacing: {x: 2, y: 5}
   m_Constraint: 1
   m_ConstraintCount: 7
 --- !u!222 &6347594285346898016
@@ -1503,7 +1504,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2547696801931140762}
-  - {fileID: 6347594285346898020}
   - {fileID: 6347594285204815810}
   m_Father: {fileID: 0}
   m_RootOrder: 0

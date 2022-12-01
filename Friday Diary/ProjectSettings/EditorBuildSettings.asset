@@ -15,6 +15,6 @@ EditorBuildSettings:
     path: Assets/Scenes/signIn.unity
     guid: fdf481048f85e4a6fa707b9db243c761
   - enabled: 1
-    path: Assets/Scenes/prefabEnv.unity
-    guid: c65f9e394f5a40a4eb8d7b902e8e5ef4
+    path: Assets/Scenes/Init.unity
+    guid: 6fc531a19f3682f4486813c4607d2fa8
   m_configObjects: {}
