@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 50be6d67640f944428182400325d4e9e, type: 3}
-  m_Name: happinessItem
+  m_Script: {fileID: 11500000, guid: 7b4ef5df93f1f184eb48f0f19d296f71, type: 3}
+  m_Name: 01.happiness
   m_EditorClassIdentifier: 
-  collectionName: happiness
+  collectionName: hapiness
   prefabs:
   - {fileID: 3706277072803009195, guid: 8307d63a1e89059439be7318e6762dd6, type: 3}
   - {fileID: 4556044224088418600, guid: 7941371a88a3b684dad82b1f16e26bd2, type: 3}

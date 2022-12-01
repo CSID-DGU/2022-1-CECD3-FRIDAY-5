@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
     public User GetUser() => user;
     public void SetUser(User user){
         this.user = user;
+        user.SetPoint();
     }
 
     public void UpdateUser(){

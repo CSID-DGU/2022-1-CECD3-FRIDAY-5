@@ -22,12 +22,11 @@ public class storeUI : MonoBehaviour
 
     // 아이템 관련
     [SerializeField]
-    GameObject itemPrefab; 
+    GameObject itemBox; 
     Text itemName;
     Text cost;
-    ItemList itemList = null; // 모든 아이템 정보 json에서 읽어와 저장
+    ItemInfoList itemList = null; // 모든 아이템 정보 json에서 읽어와 저장
     Vector3 originalScale;
-
 
     // 제어
     private GameObject curActivePanel;
@@ -47,10 +46,10 @@ public class storeUI : MonoBehaviour
 
         Debug.Log(panels.Count + " " +btns.Count);
        
-        originalScale = itemPrefab.transform.localScale;
+        originalScale = itemBox.transform.localScale;
 
         TextAsset jsonData = Resources.Load("Json/items") as TextAsset;
-        itemList = JsonUtility.FromJson<ItemList>(jsonData.ToString());
+        itemList = JsonUtility.FromJson<ItemInfoList>(jsonData.ToString());
         itemList.Init();
 
         foreach(Emotions e in Enum.GetValues(typeof(Emotions))){
@@ -59,6 +58,7 @@ public class storeUI : MonoBehaviour
 
         curActivePanel = panels[(int)Emotions.happiness].gameObject;
         curActiveIdx = (int)Emotions.happiness;
+        SetResourcePanel((int)Emotions.happiness);
     }
 
     public void ActivatePanel(int target){
@@ -75,6 +75,11 @@ public class storeUI : MonoBehaviour
             scrollView.content = curActivePanel.GetComponent<RectTransform>();
 
             // 리소스 부분
+            SetResourcePanel(target);
+        }
+    }
+
+    public void SetResourcePanel(int target){
             Image icon = resources.transform.GetChild(0).GetComponent<Image>();
             icon.sprite = resourceIcon;
             
@@ -85,8 +90,6 @@ public class storeUI : MonoBehaviour
             if( GameManager.i.GetUser()!=null){
                 resources.GetComponentInChildren<Text>().text = GameManager.i.GetUser().getPoint((Emotions)target).ToString();
             }
-            
-        }
     }
 
     public void ActivateBtn(int target){
@@ -149,12 +152,12 @@ public class storeUI : MonoBehaviour
 
     public void SetStore(Emotions e){
         if(itemList.data[e] != null){
-            foreach(Item item in itemList.data[e]){
+            foreach(ItemInfo item in itemList.data[e]){
                 // 아이템 추가
-                GameObject clone = Instantiate(itemPrefab);
+                GameObject clone = Instantiate(itemBox);
 
                 clone.transform.GetChild(0).GetComponent<Text>().text = item.itemName; // 이름
-                // clone.transform.GetChild(1).GetComponent<Image>().sprite =  // 썸네일
+                clone.transform.GetChild(1).GetComponent<Image>().sprite = ItemManager.i.GetCollection(e).getThumbnail(item.prefabName); // 썸네일
 
                 Color color;
                 ColorUtility.TryParseHtmlString(MyColor.getColor(e), out color); 
@@ -174,32 +177,32 @@ public class storeUI : MonoBehaviour
 
 
 [System.Serializable]
-public class Item{
+public class ItemInfo{
     public string itemName;
     public string prefabName;
     public int cost;
 }
 
 [System.Serializable]
-public class ItemList{
+public class ItemInfoList{
     
     [SerializeField]
-    private List<Item> happiness;
+    private List<ItemInfo> happiness;
     [SerializeField]
-    private List<Item> sadness;
+    private List<ItemInfo> sadness;
     [SerializeField]
-    private List<Item> angry;
+    private List<ItemInfo> angry;
     [SerializeField]
-    private List<Item> fear;
+    private List<ItemInfo> fear;
     [SerializeField]
-    private List<Item> surprise;
+    private List<ItemInfo> surprise;
     [SerializeField]
-    private List<Item> disgust;
+    private List<ItemInfo> disgust;
 
-    public Dictionary<Emotions, List<Item>> data;
+    public Dictionary<Emotions, List<ItemInfo>> data;
 
     public void Init(){
-        data = new Dictionary<Emotions, List<Item>>();
+        data = new Dictionary<Emotions, List<ItemInfo>>();
         data.Add(Emotions.happiness, happiness);
         data.Add(Emotions.sadness, sadness);
         data.Add(Emotions.angry, angry);

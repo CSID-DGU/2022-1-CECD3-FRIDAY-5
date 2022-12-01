@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [ CreateAssetMenu( fileName = "PrefabCollection", menuName = "Scriptable Object Asset/PrefabCollection" )]
-public class PrefabCollection : ScriptableObject
+public class ItemPrefabCollection : ScriptableObject
 {
     public string collectionName;
     public List<GameObject> prefabs;
@@ -14,6 +14,7 @@ public class PrefabCollection : ScriptableObject
 
     public void Init(){
         prefabDict = new Dictionary<string, GameObject>();
+        thumbnails = new Dictionary<string, Sprite>();
 
         foreach(GameObject p in prefabs){
             prefabDict.Add(p.name, p);
