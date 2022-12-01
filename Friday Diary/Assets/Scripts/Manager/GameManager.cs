@@ -17,4 +17,11 @@ public class GameManager : MonoBehaviour
     public void SetUser(User user){
         this.user = user;
     }
+
+    public void UpdateUser(){
+        Backend.i.ReadUser(user.GetId(),user.GetPassword(), (newUser)=>{
+            user = newUser;
+            user.SetPoint();
+        });
+    }
 }

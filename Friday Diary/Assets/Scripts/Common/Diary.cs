@@ -21,35 +21,35 @@ public class Diary
         return true;
     }
 
-    public EmotionLabel GetMaxEmotionType(){
-        EmotionLabel res = EmotionLabel.happiness;
+    public Emotions GetMaxEmotionType(){
+        Emotions res = Emotions.happiness;
         double maxVal = happiness;
 
         if(sadness > maxVal){
             maxVal=sadness;
-            res = EmotionLabel.sadness;
+            res = Emotions.sadness;
         }
         if(disgust > maxVal){
             maxVal=disgust;
-            res = EmotionLabel.disgust;
+            res = Emotions.disgust;
         }
 
 
         if(angry > maxVal){
             maxVal=angry;
-            res = EmotionLabel.angry;
+            res = Emotions.angry;
         }
 
 
         if(surprise > maxVal){
             maxVal=surprise;
-            res = EmotionLabel.surprise;
+            res = Emotions.surprise;
         }
 
 
         if(fear > maxVal){
             maxVal=fear;
-            res = EmotionLabel.fear;
+            res = Emotions.fear;
         }
 
         return res;
@@ -69,14 +69,4 @@ public class DiaryResult{
         this.fear = fear;
         this.neutral = neutral;
     }
-}
-
-public enum EmotionLabel{
-    happiness,
-    sadness,
-    disgust,
-    angry,
-    surprise,
-    fear,
-    none
 }

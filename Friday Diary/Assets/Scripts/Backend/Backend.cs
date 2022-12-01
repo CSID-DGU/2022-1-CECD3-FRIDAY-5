@@ -43,7 +43,7 @@ public class Backend : MonoBehaviour
     }
 
     // 로그인
-    public void Login(string id, string password, Action<User> onSuccess){
+    public void ReadUser(string id, string password, Action<User> onSuccess){
         Dictionary<string, string> data = new Dictionary<string, string>();
         data.Add("id",id);
         data.Add("password", password);
@@ -101,13 +101,21 @@ public class Backend : MonoBehaviour
         HttpRequest.i.Post<DiaryResult>(url+SubUrl.diary_create.ToString(), DictToJson(data), onSuccess, AlertOnFailed);
     }
 
-    // 일기 읽기
+    // 일기 읽기s
     public void ReadDiary(string id, string targetDate, Action<Diary> onSuccess){
         Dictionary<string, string> data = new Dictionary<string, string>();
         data.Add("id",GameManager.i.GetUser().GetId());
         data.Add("targetdate", targetDate);
 
         HttpRequest.i.Post<Diary>(url+SubUrl.diary_read.ToString(), DictToJson(data), onSuccess, OnFailed);
+    }
+
+    public void ReadDiary(string id, string targetDate, Action<Diary> onSuccess, Action<string> onFailed){
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("id",GameManager.i.GetUser().GetId());
+        data.Add("targetdate", targetDate);
+
+        HttpRequest.i.Post<Diary>(url+SubUrl.diary_read.ToString(), DictToJson(data), onSuccess, onFailed);
     }
 
     // 일기 갱신
@@ -149,13 +157,18 @@ public class Backend : MonoBehaviour
     public void ReadAllObjects(Action<> onSuccess){
 
     }
-   
+    */
 
     // 통계 읽기
-    public void ReadStatistics(Action<> onSuccesss){
-
+    public void ReadStatistics(string id, string startDate, string endDate, Action<EmotionStats> onSuccess){
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("id",GameManager.i.GetUser().GetId());
+        data.Add("date_start", startDate);
+        data.Add("date_end", endDate);
+    
+        HttpRequest.i.Post<EmotionStats>(url+SubUrl.statistic_read.ToString(), DictToJson(data), onSuccess, OnFailed);
     }
-    */
+    
 
 
     public void OnFailed(string message){

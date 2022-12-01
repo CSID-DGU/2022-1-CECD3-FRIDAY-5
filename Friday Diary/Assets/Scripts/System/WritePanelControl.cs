@@ -51,7 +51,7 @@ public class WritePanelControl : MonoBehaviour
     public void OnSubmitBtnClick(){
         if (GameManager.i.GetUser() != null && diaryInput.text != "") {
             string content = diaryInput.text;
-            content = content.Replace("\n","\n\n");
+            // content = content.Replace('\n','\\n');
             SetDiaryOfTheDay(content);
             Backend.i.CreateDiary(GameManager.i.GetUser().GetId(), content, OnSubmitSuccess);
         }
@@ -61,6 +61,7 @@ public class WritePanelControl : MonoBehaviour
         initialPanel.SetActive(false);
         SetResultPanel(result);
         resultPanel.SetActive(true);
+        GameManager.i.UpdateUser();
     }
 
     public void SetDiaryOfTheDay(string content){

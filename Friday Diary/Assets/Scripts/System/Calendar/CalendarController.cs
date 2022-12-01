@@ -71,11 +71,12 @@ public class CalendarController : MonoBehaviour
                     if(GameManager.i.GetUser() != null){
                         
                         Backend.i.ReadDiary(GameManager.i.GetUser().GetId(), targetDate, (res)=>{
+                            Debug.Log(targetDate);
                             if(!res.hasText()){
                                 return;
                             }
 
-                            EmotionLabel em = res.GetMaxEmotionType();
+                            Emotions em = res.GetMaxEmotionType();
                             Debug.Log(String.Format("targetDate : {0} [{1}] {2}", targetDate,res.text, em.ToString()));
                             Color color;
 
@@ -83,31 +84,33 @@ public class CalendarController : MonoBehaviour
                             checkImg.enabled=true;
                             
                             switch(em){
-                                case EmotionLabel.happiness:
+                                case Emotions.happiness:
                                      ColorUtility.TryParseHtmlString(MyColor.happiness, out color);
                                     checkImg.color = color;
                                 break;
-                                case EmotionLabel.sadness:
+                                case Emotions.sadness:
                                    ColorUtility.TryParseHtmlString(MyColor.sadness, out color);
                                     checkImg.color = color;
                                 break;
-                                case EmotionLabel.disgust:
+                                case Emotions.disgust:
                                     ColorUtility.TryParseHtmlString(MyColor.disgust, out color);
                                     checkImg.color = color;                                
                                 break;
-                                case EmotionLabel.angry:
+                                case Emotions.angry:
                                     ColorUtility.TryParseHtmlString(MyColor.angry, out color);
                                     checkImg.color = color;                                
                                     break;
-                                case EmotionLabel.surprise:
+                                case Emotions.surprise:
                                     ColorUtility.TryParseHtmlString(MyColor.surprise, out color);
                                     checkImg.color = color;                                
                                     break;
-                                case EmotionLabel.fear:
+                                case Emotions.fear:
                                     ColorUtility.TryParseHtmlString(MyColor.fear, out color);
                                     checkImg.color = color;                               
                                      break;
                             }
+                        },(noDiary)=>{
+                            checkImg.enabled = false;
                         });
                     }
                     label.text = (date + 1).ToString();
