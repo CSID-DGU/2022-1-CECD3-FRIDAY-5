@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,7 +17,7 @@ public class ItemPrefabCollection : ScriptableObject
 
         foreach(GameObject p in prefabs){
             prefabDict.Add(p.name, p);
-            Texture2D preview =AssetPreview.GetMiniThumbnail(p);
+            Texture2D preview =Resources.Load("thumbnail") as Texture2D;
 
             thumbnails.Add(p.name, Sprite.Create(preview,new Rect(0, 0, preview.width, preview.height), new Vector2(0.5f, 0.5f)));
         }
