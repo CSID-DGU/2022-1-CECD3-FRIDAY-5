@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text;
+using UnityEngine.SceneManagement;
 
 public class account : MonoBehaviour
 {
-    public GameObject accountPopUp;
+    public GameObject accountPopUp, deletePopUp; 
 
     public void onclickAccountBTN()
     {
@@ -15,12 +16,22 @@ public class account : MonoBehaviour
 
     public void onclickYesBTN()
     {
-        // 계정 정보 삭제 
-        // 메인씬으로 이동
+        Backend.i.DeleteUser( onDeletesuccess );
     }
 
     public void onclickNoBTN()
     {
         accountPopUp.SetActive(false);
+    }
+
+    public void onDeletesuccess ( string x )
+    { 
+        accountPopUp.SetActive(false);
+        deletePopUp.SetActive(true);
+    }
+
+    public void onclickConfirmBTN ()
+    {
+        SceneManager.LoadScene("login");
     }
 }
