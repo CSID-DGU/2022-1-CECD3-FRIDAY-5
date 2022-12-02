@@ -78,6 +78,7 @@ public class Backend : MonoBehaviour
 
     // 회원 탈퇴
     public void DeleteUser(Action<string> onSuccess){
+        Debug.Log("아이아이아");
         User user = GameManager.i.GetUser();
 
         if(user==null) {
