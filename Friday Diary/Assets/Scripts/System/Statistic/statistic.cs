@@ -23,17 +23,17 @@ public class StatisticDate // 통계 기간 클래스
 
 }
 
-public class Emotion 
+public class EmotionStats 
 {
-    public double happy, sad, angry, disgust, fear, surprise, neutral;
+    public double happiness, sadness, angry, disgust, fear, surprise, neutral, sum;
 
-    public Emotion(){
+    public EmotionStats(){
     }
 
-    public Emotion(double happy, double sad, double angry, double disgust, double fear, double surprise, double neutral)
+    public EmotionStats(double happy, double sad, double angry, double disgust, double fear, double surprise, double neutral)
     {
-        this.happy = happy;
-        this.sad = sad;
+        this.happiness = happy;
+        this.sadness = sad;
         this.angry = angry;
         this.disgust = disgust;
         this.fear = fear;
@@ -59,16 +59,21 @@ public class statistic : MonoBehaviour
         show.text = string.Format("{0} ~ {1}", newDate.date_start, newDate.date_end);
  
         //StartCoroutine( UnityWebRequestPOST(newDate)); 
+        Backend.i.ReadStatistics(GameManager.i.GetUser().GetId(), newDate.date_start,newDate.date_end, OnReadStatSuccess);
 
-        Emotion graphEmotion = new Emotion(0.3,0.2,0.1,0.1,0.1,0.2,0.6);
-        graphVisualize(graphEmotion);
+        // Emotion graphEmotion = new Emotion(0.3,0.2,0.1,0.1,0.1,0.2,0.6);
+        // graphVisualize(graphEmotion);
+    }
+
+    public void OnReadStatSuccess(EmotionStats res){
+        Debug.Log(res);
+        graphVisualize(res);
     }
     
-    public void graphVisualize(Emotion graphEmotion)
+    public void graphVisualize(EmotionStats graphEmotion)
     {
-
-        i0.fillAmount = (float)graphEmotion.happy;
-        i1.fillAmount = (float)graphEmotion.sad;
+        i0.fillAmount = (float)graphEmotion.happiness;
+        i1.fillAmount = (float)graphEmotion.sadness;
         i2.fillAmount = (float)graphEmotion.angry;
         i3.fillAmount = (float)graphEmotion.disgust;
         i4.fillAmount = (float)graphEmotion.fear;

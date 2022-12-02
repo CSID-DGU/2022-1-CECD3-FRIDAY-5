@@ -13,6 +13,47 @@ public class Diary
     public void InitDiaryResult(){
         diaryResult = new DiaryResult(this.happiness, this.sadness, this.disgust, this.angry, this.surprise, this.fear, this.neutral);
     }
+
+    public bool hasText(){
+        if(text == null || text == ""){
+            return false;
+        }
+        return true;
+    }
+
+    public Emotions GetMaxEmotionType(){
+        Emotions res = Emotions.happiness;
+        double maxVal = happiness;
+
+        if(sadness > maxVal){
+            maxVal=sadness;
+            res = Emotions.sadness;
+        }
+        if(disgust > maxVal){
+            maxVal=disgust;
+            res = Emotions.disgust;
+        }
+
+
+        if(angry > maxVal){
+            maxVal=angry;
+            res = Emotions.angry;
+        }
+
+
+        if(surprise > maxVal){
+            maxVal=surprise;
+            res = Emotions.surprise;
+        }
+
+
+        if(fear > maxVal){
+            maxVal=fear;
+            res = Emotions.fear;
+        }
+
+        return res;
+    }
 }
 
 [System.Serializable]
