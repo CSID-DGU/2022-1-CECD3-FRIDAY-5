@@ -1,0 +1,379 @@
+{
+  "happiness": [
+    {
+      "itemName": "행복한 나무",
+      "prefabName": "tree1 01",
+      "cost": 10
+    },
+    {
+      "itemName": "행복한 브로콜리 나무",
+      "prefabName": "tree1 02",
+      "cost": 20
+    },
+    {
+      "itemName": "행복한 당고 나무",
+      "prefabName": "tree1 03",
+      "cost": 20
+    },
+    {
+      "itemName": "행복한 버섯 나무",
+      "prefabName": "tree1 04",
+      "cost": 20
+    },
+    {
+      "itemName": "행복한 야자수 나무",
+      "prefabName": "tree1 05",
+      "cost": 20
+    },
+    {
+      "itemName": "행복한 가시고기 나무",
+      "prefabName": "tree1 06",
+      "cost": 30
+    },
+    {
+      "itemName": "행복한 바나나 나무",
+      "prefabName": "tree1 07",
+      "cost": 30
+    },
+    {
+      "itemName": "행복한 솜사탕 나무",
+      "prefabName": "tree1 08",
+      "cost": 30
+    },
+    {
+      "itemName": "행복한 얼초 나무",
+      "prefabName": "tree1 09",
+      "cost": 30
+    },
+    {
+      "itemName": "행복한 비행선 나무",
+      "prefabName": "aircraft1",
+      "cost": 50
+    },
+    {
+      "itemName": "행복한 해적선 나무",
+      "prefabName": "ship1",
+      "cost": 50
+    },
+    {
+      "itemName": "행복한 고래 나무",
+      "prefabName": "whale1",
+      "cost": 50
+    }
+  ],
+
+  "sadness": [
+    {
+      "itemName": "슬픈 나무",
+      "prefabName": "tree2 01",
+      "cost": 10
+    },
+    {
+      "itemName": "슬픈 브로콜리 나무",
+      "prefabName": "tree2 02",
+      "cost": 20
+    },
+    {
+      "itemName": "슬픈 당고 나무",
+      "prefabName": "tree2 03",
+      "cost": 20
+    },
+    {
+      "itemName": "슬픈 버섯 나무",
+      "prefabName": "tree2 04",
+      "cost": 20
+    },
+    {
+      "itemName": "슬픈 야자수 나무",
+      "prefabName": "tree2 05",
+      "cost": 20
+    },
+    {
+      "itemName": "슬픈 가시고기 나무",
+      "prefabName": "tree2 06",
+      "cost": 30
+    },
+    {
+      "itemName": "슬픈 바나나 나무",
+      "prefabName": "tree2 07",
+      "cost": 30
+    },
+    {
+      "itemName": "슬픈 솜사탕 나무",
+      "prefabName": "tree2 08",
+      "cost": 30
+    },
+    {
+      "itemName": "슬픈 얼초 나무",
+      "prefabName": "tree2 09",
+      "cost": 30
+    },
+    {
+      "itemName": "슬픈 비행선",
+      "prefabName": "aircraft2",
+      "cost": 50
+    },
+    {
+      "itemName": "슬픈 해적선",
+      "prefabName": "ship2",
+      "cost": 50
+    },
+    {
+      "itemName": "슬픈 고래",
+      "prefabName": "whale2",
+      "cost": 50
+    }
+  ],
+
+  "angry": [
+    {
+      "itemName": "분노한 나무",
+      "prefabName": "tree3 01",
+      "cost": 10
+    },
+    {
+      "itemName": "분노한 브로콜리 나무",
+      "prefabName": "tree3 02",
+      "cost": 20
+    },
+    {
+      "itemName": "분노한 당고 나무",
+      "prefabName": "tree3 03",
+      "cost": 20
+    },
+    {
+      "itemName": "분노한 버섯 나무",
+      "prefabName": "tree3 04",
+      "cost": 20
+    },
+    {
+      "itemName": "분노한 야자수 나무",
+      "prefabName": "tree3 05",
+      "cost": 20
+    },
+    {
+      "itemName": "분노한 가시고기 나무",
+      "prefabName": "tree3 06",
+      "cost": 30
+    },
+    {
+      "itemName": "분노한 바나나 나무",
+      "prefabName": "tree3 07",
+      "cost": 30
+    },
+    {
+      "itemName": "분노한 솜사탕 나무",
+      "prefabName": "tree3 08",
+      "cost": 30
+    },
+    {
+      "itemName": "분노한 얼초 나무",
+      "prefabName": "tree3 09",
+      "cost": 30
+    },
+    {
+      "itemName": "분노한 비행선",
+      "prefabName": "aircraft3",
+      "cost": 50
+    },
+    {
+      "itemName": "분노한 해적선",
+      "prefabName": "ship3",
+      "cost": 50
+    },
+    {
+      "itemName": "분노한 고래",
+      "prefabName": "whale3",
+      "cost": 50
+    }
+  ],
+
+  "fear": [
+    {
+      "itemName": "두려운 나무",
+      "prefabName": "tree4 01",
+      "cost": 10
+    },
+    {
+      "itemName": "두려운 브로콜리 나무",
+      "prefabName": "tree4 02",
+      "cost": 20
+    },
+    {
+      "itemName": "두려운 당고 나무",
+      "prefabName": "tree4 03",
+      "cost": 20
+    },
+    {
+      "itemName": "두려운 버섯 나무",
+      "prefabName": "tree4 04",
+      "cost": 20
+    },
+    {
+      "itemName": "두려운 야자수 나무",
+      "prefabName": "tree4 05",
+      "cost": 20
+    },
+    {
+      "itemName": "두려운 가시고기 나무",
+      "prefabName": "tree4 06",
+      "cost": 30
+    },
+    {
+      "itemName": "두려운 바나나 나무",
+      "prefabName": "tree4 07",
+      "cost": 30
+    },
+    {
+      "itemName": "두려운 솜사탕 나무",
+      "prefabName": "tree4 08",
+      "cost": 30
+    },
+    {
+      "itemName": "두려운 얼초 나무",
+      "prefabName": "tree4 09",
+      "cost": 30
+    },
+    {
+      "itemName": "두려운 비행선",
+      "prefabName": "aircraft4",
+      "cost": 50
+    },
+    {
+      "itemName": "두려운 해적선",
+      "prefabName": "ship4",
+      "cost": 50
+    },
+    {
+      "itemName": "두려운 고래",
+      "prefabName": "whale4",
+      "cost": 50
+    }
+  ],
+
+  "surprise": [
+    {
+      "itemName": "놀라운 나무",
+      "prefabName": "tree5 01",
+      "cost": 10
+    },
+    {
+      "itemName": "놀라운 브로콜리 나무",
+      "prefabName": "tree5 02",
+      "cost": 20
+    },
+    {
+      "name": "놀라운 당고 나무",
+      "prefabName": "tree5 03",
+      "cost": 20
+    },
+    {
+      "itemName": "놀라운 버섯 나무",
+      "prefabName": "tree5 04",
+      "cost": 20
+    },
+    {
+      "itemName": "놀라운 야자수 나무",
+      "prefabName": "tree5 05",
+      "cost": 20
+    },
+    {
+      "itemName": "놀라운 가시고기 나무",
+      "prefabName": "tree5 06",
+      "cost": 30
+    },
+    {
+      "itemName": "놀라운 바나나 나무",
+      "prefabName": "tree5 07",
+      "cost": 30
+    },
+    {
+      "itemName": "놀라운 솜사탕 나무",
+      "prefabName": "tree5 08",
+      "cost": 30
+    },
+    {
+      "itemName": "놀라운 얼초 나무",
+      "prefabName": "tree5 09",
+      "cost": 30
+    },
+    {
+      "itemName": "놀라운 비행선",
+      "prefabName": "aircraft5",
+      "cost": 50
+    },
+    {
+      "itemName": "놀라운 해적선",
+      "prefabName": "ship5",
+      "cost": 50
+    },
+    {
+      "itemName": "놀라운 고래",
+      "prefabName": "whale5",
+      "cost": 50
+    }
+  ],
+
+  "disgust": [
+    {
+      "itemName": "불쾌한 나무",
+      "prefabName": "tree6 01",
+      "cost": 10
+    },
+    {
+      "itemName": "불쾌한 브로콜리 나무",
+      "prefabName": "tree6 02",
+      "cost": 20
+    },
+    {
+      "itemName": "불쾌한 당고 나무",
+      "prefabName": "tree6 03",
+      "cost": 20
+    },
+    {
+      "itemName": "불쾌한 버섯 나무",
+      "prefabName": "tree6 04",
+      "cost": 20
+    },
+    {
+      "itemName": "불쾌한 야자수 나무",
+      "prefabName": "tree6 05",
+      "cost": 20
+    },
+    {
+      "itemName": "불쾌한 가시고기 나무",
+      "prefabName": "tree6 06",
+      "cost": 30
+    },
+    {
+      "itemName": "불쾌한 바나나 나무",
+      "prefabName": "tree6 07",
+      "cost": 30
+    },
+    {
+      "itemName": "불쾌한 솜사탕 나무",
+      "prefabName": "tree6 08",
+      "cost": 30
+    },
+    {
+      "itemName": "불쾌한 얼초 나무",
+      "prefabName": "tree6 09",
+      "cost": 30
+    },
+    {
+      "itemName": "불쾌한 비행선",
+      "prefabName": "aircraft6",
+      "cost": 50
+    },
+    {
+      "itemName": "불쾌한 해적선",
+      "prefabName": "ship6",
+      "cost": 50
+    },
+    {
+      "itemName": "불쾌한 고래",
+      "prefabName": "whale6",
+      "cost": 50
+    }
+  ]
+}
