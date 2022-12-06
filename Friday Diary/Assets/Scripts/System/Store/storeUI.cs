@@ -23,8 +23,7 @@ public class storeUI : MonoBehaviour
     // 아이템 관련
     [SerializeField]
     GameObject itemBox; 
-    Text itemName;
-    Text cost;
+
     ItemInfoList itemList = null; // 모든 아이템 정보 json에서 읽어와 저장
     Vector3 originalScale;
 
@@ -60,6 +59,14 @@ public class storeUI : MonoBehaviour
         curActiveIdx = (int)Emotions.happiness;
         SetResourcePanel((int)Emotions.happiness);
     }
+
+    public void BuyItem(Emotions em, string prefabName){
+        this.gameObject.SetActive(false);
+
+        ItemCreator.i.SwitchPlaceMode(ItemManager.i.GetCollection(em).getPrefab(prefabName));
+    }
+
+
 
     public void ActivatePanel(int target){
         if((int)target < panels.Count){
@@ -164,6 +171,9 @@ public class storeUI : MonoBehaviour
                 clone.transform.GetChild(2).GetComponent<Image>().color = color; // 색 설정 
 
                 clone.transform.GetChild(3).GetChild(1).GetComponent<Text>().text = item.cost.ToString();
+                clone.transform.GetChild(3).GetComponent<Button>().onClick.AddListener(()=>{
+                    BuyItem(e, item.prefabName);
+                });
 
                 clone.transform.SetParent(panels[(int)e]); // 패널에 할당
                 clone.transform.localPosition = new Vector3(clone.transform.position.x, clone.transform.position.y, 0f);

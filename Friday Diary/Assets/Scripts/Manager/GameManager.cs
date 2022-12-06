@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,11 @@ public class GameManager : MonoBehaviour
             user = newUser;
             user.SetPoint();
         });
+    }
+
+    public void LogOut(){
+        DataManager.i.DeleteGameData();
+        LoadSceneManager.i.ToLogin();
     }
 
     public void SetResolution()

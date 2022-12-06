@@ -11,7 +11,7 @@ public class LoginSceneScript : MonoBehaviour
     public InputField passwordInput, idInput; 
     public void onSignUpBtnclick()
     {
-        SceneManager.LoadScene("signin");
+        LoadSceneManager.i.ToSignIn();
     }
     
     public void onLoginBtnclick()
@@ -25,6 +25,6 @@ public class LoginSceneScript : MonoBehaviour
         DataManager.i.SaveGameData(new AccessToken(user.GetId(), user.GetPassword()));
         GameManager.i.SetUser(user);
 
-        SceneManager.LoadScene("Main");
+        LoadSceneManager.i.ToMain();
     }
 }

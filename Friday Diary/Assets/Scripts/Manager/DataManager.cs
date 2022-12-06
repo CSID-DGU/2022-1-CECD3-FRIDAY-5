@@ -33,6 +33,15 @@ public class DataManager : MonoBehaviour
         return null;
     }
 
+    public void DeleteGameData(){
+        string filePath = Application.persistentDataPath + @"\data.json";
+
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+        }
+    }
+
 
     // 저장하기
     public void SaveGameData(AccessToken token)

@@ -48,7 +48,7 @@ public class Backend : MonoBehaviour
         data.Add("id",id);
         data.Add("password", password);
 
-        // Debug.Log(DictToJson(data));
+        Debug.Log(DictToJson(data));
         HttpRequest.i.Post<User>(url+SubUrl.member_read.ToString(),DictToJson(data), onSuccess, AlertOnFailed);
     }
 
@@ -78,7 +78,6 @@ public class Backend : MonoBehaviour
 
     // 회원 탈퇴
     public void DeleteUser(Action<string> onSuccess){
-        Debug.Log("아이아이아");
         User user = GameManager.i.GetUser();
 
         if(user==null) {

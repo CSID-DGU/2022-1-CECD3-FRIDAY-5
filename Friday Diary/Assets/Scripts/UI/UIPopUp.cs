@@ -7,23 +7,35 @@ using UnityEngine.UI;
 public class UIPopUp : MonoBehaviour
 {
     public static UIPopUp i;
-    [SerializeField]
+    
     GameObject popup;
 
     [SerializeField]
+    GameObject prefab;
+
     Text title;
 
-    [SerializeField]
     Text content;
 
-
-    private void Start() {
+    private void Awake() {
         if(i==null) i = this;
 
-        // title = popup.transform.GetChild(1).GetComponent<Text>();
-        // content = popup.transform.GetChild(2).GetComponent<Text>();
+
     }
 
+    private void Start() {
+        if(popup==null){
+            Vector3 originalScale = prefab.transform.localScale;
+            popup = Instantiate(prefab, new Vector3(0f,0f,0f), Quaternion.identity, GameObject.Find("Canvas").transform);
+            popup.transform.localScale = originalScale;
+            popup.transform.localPosition = new Vector3(0f,0f,0f);
+
+            title = popup.transform.GetChild(0).GetChild(0).GetChild(0).GetComponent<Text>();
+            content = popup.transform.GetChild(0).GetChild(1).GetComponent<Text>();
+
+            popup.SetActive(false);
+        }
+    }
 
     public void SetText(string title, string text){
         this.title.text = title;
