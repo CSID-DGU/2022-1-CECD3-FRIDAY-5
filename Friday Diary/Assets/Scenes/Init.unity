@@ -216,6 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 113516631}
   - component: {fileID: 113516630}
+  - component: {fileID: 113516632}
   m_Layer: 0
   m_Name: DataManager
   m_TagString: Untagged
@@ -249,6 +250,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &113516632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113516629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a736eff94508def46a9f1934ad9bd4a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  emotionItems:
+  - {fileID: 11400000, guid: 58dd274c880778341bb9727aff46aef1, type: 2}
+  - {fileID: 11400000, guid: dc56a178106bb8a409b5a1f2a7582b53, type: 2}
+  - {fileID: 11400000, guid: d18c84fe9cec6294a9109e3b5d4bd17f, type: 2}
+  - {fileID: 11400000, guid: f374b0d35e57f8b41a5a2f7442ab02be, type: 2}
+  - {fileID: 11400000, guid: 9eb5bcbd9486f0047b10bccde332e0d6, type: 2}
+  - {fileID: 11400000, guid: 757e64f90bc29c740be94e074edc077a, type: 2}
 --- !u!1001 &115817778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -595,6 +615,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6407920590026089931, guid: 51b83b29871f2b74fb16f0b2968d41e2, type: 3}
+      propertyPath: images.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: ea374e3c3e6f4124baf5bcf4c351415d, type: 3}
+    - target: {fileID: 6407920590026089931, guid: 51b83b29871f2b74fb16f0b2968d41e2, type: 3}
+      propertyPath: images.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: 39bb06ac0754976438a3bb78ef52c568, type: 3}
+    - target: {fileID: 6407920590026089931, guid: 51b83b29871f2b74fb16f0b2968d41e2, type: 3}
+      propertyPath: images.Array.data[2]
+      value: 
+      objectReference: {fileID: 21300000, guid: 7590806cef4be65448d8b2885bb6c6af, type: 3}
+    - target: {fileID: 6407920590026089931, guid: 51b83b29871f2b74fb16f0b2968d41e2, type: 3}
+      propertyPath: images.Array.data[3]
+      value: 
+      objectReference: {fileID: 21300000, guid: d89831ff9ef45ad4091ab394f5df463e, type: 3}
+    - target: {fileID: 6407920590026089931, guid: 51b83b29871f2b74fb16f0b2968d41e2, type: 3}
+      propertyPath: images.Array.data[4]
+      value: 
+      objectReference: {fileID: 21300000, guid: 78bd92def4f3cdc48a3a723524b8a6b6, type: 3}
     - target: {fileID: 6407920590026089940, guid: 51b83b29871f2b74fb16f0b2968d41e2, type: 3}
       propertyPath: m_Name
       value: UIManager

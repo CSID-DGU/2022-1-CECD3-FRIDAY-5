@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class LoadingWindow : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class LoadingWindow : MonoBehaviour
 
     [SerializeField]
     List<Sprite> images;
+
+    public bool isLoading;
 
     public static LoadingWindow i;
 
@@ -42,6 +45,7 @@ public class LoadingWindow : MonoBehaviour
     
     IEnumerator Loading(){
         loadPanel.SetActive(true);
+        isLoading = true;
         while(true){
         foreach(Sprite newSprite in images){
             // 이미지 바꾸고
@@ -79,8 +83,22 @@ public class LoadingWindow : MonoBehaviour
         }
     }
 
-    public void EndLoading(){
+    public void EndLoading(Action onFinish){
+        StopCoroutine(Loading());
+        isLoading = false;
+        onFinish.Invoke();
+        loadPanel.SetActive(false);
+    }
+
+    
+    public void EndLoading(float delay, Action onFinish){
+       StartCoroutine(EndLoadingWithDelay(delay, onFinish));
+    }
+
+    IEnumerator EndLoadingWithDelay(float delay, Action onFinish){
+        yield return new WaitForSeconds(delay);
         StopCoroutine(Loading());
         loadPanel.SetActive(false);
+        onFinish.Invoke();
     }
 }

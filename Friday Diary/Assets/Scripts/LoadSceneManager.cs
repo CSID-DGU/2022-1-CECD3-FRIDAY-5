@@ -2,51 +2,69 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 using UnityEngine.UI;
 
 public enum Scene{
-    Login,
+    login,
     Main,
-    SignIn
+    signin
 }
 public class LoadSceneManager : MonoBehaviour
 {
     public static LoadSceneManager i;
 
-    private void Start() {
+    private void Awake() {
         if(i==null) i=this;
     }
-    public void LoadScene(Scene scene){
-        StartCoroutine(LoadAsynSceneCoroutine(scene.ToString())); 
+    private void Start() {
+        LoadingWindow.i.StartLoading();
+
+        if(SceneManager.GetActiveScene().isLoaded){
+            LoadingWindow.i.EndLoading(2f,()=>{
+                // do nothing
+            });
+        }
     }
 
-    IEnumerator LoadAsynSceneCoroutine(string sceneName) {
+    
+    public void LoadScene(Scene scene, Action onFinish){
+        if(!LoadingWindow.i.isLoading){
+            LoadingWindow.i.StartLoading();
+        }
+        StartCoroutine(LoadAsynSceneCoroutine(scene.ToString(), onFinish)); 
+    }
+
+    IEnumerator LoadAsynSceneCoroutine(string sceneName, Action onFinish) {
 
         AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
 
         operation.allowSceneActivation = false;
 
-        LoadingWindow.i.StartLoading();
         while(operation.isDone){
             
             yield return null;
         }
-        
-        LoadingWindow.i.EndLoading();
-        operation.allowSceneActivation = true;
+        yield return new WaitForSeconds(2f);
+        LoadingWindow.i.EndLoading(()=>{
+            operation.allowSceneActivation = true;
+        });
+        yield return null;
     }
 
 
     public void ToLogin(){
-        LoadScene(Scene.Login);
+        LoadScene(Scene.login, doNothing);
     }
 
     public void ToMain(){
-        LoadScene(Scene.Main);
+        LoadScene(Scene.Main, doNothing);
     }
 
     
     public void ToSignIn(){
-        LoadScene(Scene.SignIn);
+        LoadScene(Scene.signin,doNothing);
     }
+
+    public void doNothing(){}
 }

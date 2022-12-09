@@ -21,7 +21,7 @@ public class Backend : MonoBehaviour
         tree_update,
         tree_delete,
         statistic_read,
-        all_tree_read
+        tree_list_read
     }
 
     private string url = "http://15.164.6.142:8080/";
@@ -48,7 +48,6 @@ public class Backend : MonoBehaviour
         data.Add("id",id);
         data.Add("password", password);
 
-        Debug.Log(DictToJson(data));
         HttpRequest.i.Post<User>(url+SubUrl.member_read.ToString(),DictToJson(data), onSuccess, AlertOnFailed);
     }
 
@@ -98,10 +97,11 @@ public class Backend : MonoBehaviour
         data.Add("id",GameManager.i.GetUser().GetId());
         data.Add("text", text);
 
+        LoadingWindow.i.StartLoading();
         HttpRequest.i.Post<DiaryResult>(url+SubUrl.diary_create.ToString(), DictToJson(data), onSuccess, AlertOnFailed);
     }
 
-    // 일기 읽기s
+    // 일기 읽기
     public void ReadDiary(string id, string targetDate, Action<Diary> onSuccess){
         Dictionary<string, string> data = new Dictionary<string, string>();
         data.Add("id",GameManager.i.GetUser().GetId());
@@ -137,12 +137,24 @@ public class Backend : MonoBehaviour
         HttpRequest.i.Post<string>(url+SubUrl.diary_delete.ToString(), DictToJson(data), onSuccess, AlertOnFailed);
     }
 
-    /*
+    
     // 나무 구매
-    public void CreateObject(Action<> onSuccess){
-        
+    public void CreateObject(string emotion, int cost, Tree tree,Action<string> onSuccess){
+        /*
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("id",GameManager.i.GetUser().GetId());
+        data.Add("cost_sentiment",emotion);
+        data.Add("cost_quantity",cost.ToString());
+        data.Add("treename",tree.treeid);
+        data.Add("positionx",tree.getx().ToString());
+        data.Add("positiony",tree.gety().ToString());
+        data.Add("positionz",tree.getz().ToString());
+
+        HttpRequest.i.Post<string>(url+SubUrl.tree_create.ToString(), DictToJson(data), onSuccess, AlertOnFailed);
+        */
     }
 
+    /*
     // 나무 갱신
     public void UpdateObject(Action<> onSuccess){
         
@@ -152,12 +164,16 @@ public class Backend : MonoBehaviour
     public void DeleteObject(Action<> onSuccess){
 
     }
+    */
 
     // 회원 나무 전부 조회
-    public void ReadAllObjects(Action<> onSuccess){
+    public void ReadAllObjects(String id, Action<TreeList> onSuccess){
+       Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("id",GameManager.i.GetUser().GetId());
 
+        HttpRequest.i.Post<TreeList>(url+SubUrl.tree_list_read.ToString(), DictToJson(data), onSuccess, AlertOnFailed);
     }
-    */
+    
 
     // 통계 읽기
     public void ReadStatistics(string id, string startDate, string endDate, Action<EmotionStats> onSuccess){

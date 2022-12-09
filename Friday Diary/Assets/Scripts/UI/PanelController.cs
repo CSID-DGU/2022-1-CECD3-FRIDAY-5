@@ -11,18 +11,16 @@ public class PanelController : MonoBehaviour
     public GameObject statisticsPanel;
 
     private GameObject curActivePanel;
+    public GameObject storePanel;
+
 
     private void Start()
     {
         curActivePanel = mainPanel;
 
-        writePanel.SetActive(true);
-        calendarPanel.SetActive(true);
-        statisticsPanel.SetActive(true);
-        writePanel.SetActive(false);
-        calendarPanel.SetActive(false);
-        statisticsPanel.SetActive(false);
-        
+        writePanel.GetComponent<WritePanelControl>().Init();
+        calendarPanel.GetComponent<CalendarController>().Init();
+        storePanel.GetComponent<storeUI>().Init();
     }
 
     public void OnMainBtnClick(){

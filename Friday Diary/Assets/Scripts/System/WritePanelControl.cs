@@ -27,10 +27,10 @@ public class WritePanelControl : MonoBehaviour
 
     private void Start()
     {
-        Initialize();
+        // Initialize();
     }
 
-    public void Initialize(){
+    public void Init(){
         date.text= DateTime.Now.ToString("yyyy.MM.dd");
         ReadDiary();
     }
@@ -64,7 +64,11 @@ public class WritePanelControl : MonoBehaviour
         SetResultPanel(result);
         resultPanel.SetActive(true);
         GameManager.i.UpdateUser();
-        CalendarController._calendarInstance.ReloadPanel();
+        
+        
+
+        LoadingWindow.i.EndLoading(1f,()=>{});
+        
     }
 
     public void SetDiaryOfTheDay(string content){
