@@ -27,11 +27,14 @@ public class WritePanelControl : MonoBehaviour
 
     private void Start()
     {
-        Initialize();
+        // Initialize();
     }
 
-    private void Initialize(){
+    public void Init(){
         date.text= DateTime.Now.ToString("yyyy.MM.dd");
+        ReadDiary();
+    }
+    private void ReadDiary(){
         if(GameManager.i.GetUser() != null){
             Backend.i.ReadDiary(GameManager.i.GetUser().GetId(), DateTime.Now.ToString("yyyyMMdd"), OnReadDiarySuccess);
         }
@@ -45,13 +48,12 @@ public class WritePanelControl : MonoBehaviour
             resultPanel.SetActive(true);
             initialPanel.SetActive(false);
         }
-
     }
 
     public void OnSubmitBtnClick(){
         if (GameManager.i.GetUser() != null && diaryInput.text != "") {
             string content = diaryInput.text;
-            // content = content.Replace('\n','\\n');
+            content = content.Replace('\n',' ');
             SetDiaryOfTheDay(content);
             Backend.i.CreateDiary(GameManager.i.GetUser().GetId(), content, OnSubmitSuccess);
         }
@@ -62,6 +64,11 @@ public class WritePanelControl : MonoBehaviour
         SetResultPanel(result);
         resultPanel.SetActive(true);
         GameManager.i.UpdateUser();
+        
+        
+
+        LoadingWindow.i.EndLoading(1f,()=>{});
+        
     }
 
     public void SetDiaryOfTheDay(string content){
@@ -71,6 +78,10 @@ public class WritePanelControl : MonoBehaviour
     public void SetResultPanel(DiaryResult result){
         if(result != null){
             StatOfTheDay.text = "오늘 하루는 \n";
+            if(result.neutral == 1.0){
+                StatOfTheDay.text = "무난했어요! \n";
+                return;
+            }
             if(result.happiness > 0){
                 
                 StatOfTheDay.text += string.Format("<color={0}>행복</color>이 <color={1}>{2} 포인트</color>\n", MyColor.happiness, MyColor.happiness, Math.Round(result.happiness*100,1));

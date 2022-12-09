@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class CalendarController : MonoBehaviour
 {
+
     public GameObject _calendarPanel;
     public Text _yearNumText;
     public Text _monthNumText;
@@ -20,6 +21,11 @@ public class CalendarController : MonoBehaviour
 
     void Start()
     {
+
+    }
+
+    public void Init(){
+        
         _calendarInstance = this;
         Vector3 startPos = _item.transform.localPosition;
         _dateItems.Clear();
@@ -41,7 +47,11 @@ public class CalendarController : MonoBehaviour
 
         CreateCalendar();
 
-        _calendarPanel.SetActive(true);
+        // _calendarPanel.SetActive(true);
+    }
+
+    public void ReloadPanel(){
+        CreateCalendar();
     }
 
     void CreateCalendar()

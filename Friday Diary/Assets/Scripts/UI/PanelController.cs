@@ -9,13 +9,18 @@ public class PanelController : MonoBehaviour
     public GameObject writePanel;
     public GameObject calendarPanel;
     public GameObject statisticsPanel;
-    public GameObject friendPanel;
 
     private GameObject curActivePanel;
+    public GameObject storePanel;
+
 
     private void Start()
     {
         curActivePanel = mainPanel;
+
+        writePanel.GetComponent<WritePanelControl>().Init();
+        calendarPanel.GetComponent<CalendarController>().Init();
+        storePanel.GetComponent<storeUI>().Init();
     }
 
     public void OnMainBtnClick(){
@@ -45,14 +50,6 @@ public class PanelController : MonoBehaviour
         if(statisticsPanel!=null && curActivePanel != statisticsPanel){        
             curActivePanel.SetActive(false); 
             statisticsPanel.SetActive(true);
-            curActivePanel = statisticsPanel;
-        }
-    }
-
-    public void OnFriendBtnClick(){
-        if(friendPanel!=null && curActivePanel != friendPanel){        
-            curActivePanel.SetActive(false); 
-            friendPanel.SetActive(true);
             curActivePanel = statisticsPanel;
         }
     }

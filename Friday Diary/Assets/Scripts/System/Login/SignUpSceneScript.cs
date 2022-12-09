@@ -41,7 +41,7 @@ public class SignUpSceneScript : MonoBehaviour
     }
 
     public void LoadInitializeScene(){
-        SceneManager.LoadScene("login");
+        LoadSceneManager.i.ToLogin();
     }
 
     public void usernameCheck()

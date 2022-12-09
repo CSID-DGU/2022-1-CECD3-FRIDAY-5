@@ -14,12 +14,12 @@ public class User {
     public string GetPassword() => password;
     
     public void SetPoint(){
-        happinessPt = Convert.ToInt32(happinessmoney);
-        sadnessPt = Convert.ToInt32(sadnessmoney);
-        angryPt = Convert.ToInt32(angrymoney);
-        fearPt = Convert.ToInt32(fearmoney);
-        surprisePt = Convert.ToInt32(surprisemoney);
-        disgustPt = Convert.ToInt32(disgustmoney);    
+        happinessPt = Convert.ToInt32(happinessmoney*100);
+        sadnessPt = Convert.ToInt32(sadnessmoney*100);
+        angryPt = Convert.ToInt32(angrymoney*100);
+        fearPt = Convert.ToInt32(fearmoney*100);
+        surprisePt = Convert.ToInt32(surprisemoney*100);
+        disgustPt = Convert.ToInt32(disgustmoney*100);    
     }
 
     public int getPoint(Emotions em){

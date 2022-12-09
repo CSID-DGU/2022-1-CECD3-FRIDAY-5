@@ -8,6 +8,8 @@ using System.Text;
 
 public class storeUI : MonoBehaviour
 {
+
+    public static storeUI i;
     [SerializeField]
     ScrollRect scrollView; // 패널의 루트
     [SerializeField]
@@ -23,8 +25,7 @@ public class storeUI : MonoBehaviour
     // 아이템 관련
     [SerializeField]
     GameObject itemBox; 
-    Text itemName;
-    Text cost;
+
     ItemInfoList itemList = null; // 모든 아이템 정보 json에서 읽어와 저장
     Vector3 originalScale;
 
@@ -35,16 +36,17 @@ public class storeUI : MonoBehaviour
 
     public void Start()
     {
-        InitStore();
+        // Init();
+        if(i==null) i=this;
     }
 
-    public void InitStore(){
+    public void Init(){
         panels = new List<Transform>();
         panels = scrollView.transform.GetChild(0).GetComponentsInChildren<Transform>(true).ToList();
         panels.RemoveAt(0);
-        btns = tabs.transform.GetComponentsInChildren<Image>(true).ToList();
 
-        Debug.Log(panels.Count + " " +btns.Count);
+        Debug.Log(panels.Count);
+        btns = tabs.transform.GetComponentsInChildren<Image>(true).ToList();
        
         originalScale = itemBox.transform.localScale;
 
@@ -61,12 +63,31 @@ public class storeUI : MonoBehaviour
         SetResourcePanel((int)Emotions.happiness);
     }
 
+    public void ReloadStore(){
+        foreach(Emotions e in Enum.GetValues(typeof(Emotions))){
+            SetStore(e);
+        }
+    }
+
+    public void BuyItem(ItemInfo info){
+        this.gameObject.SetActive(false);
+
+        ItemCreator.i.SwitchPlaceMode( info);
+    }
+
+
+
     public void ActivatePanel(int target){
         if((int)target < panels.Count){
             
             if(curActivePanel != null && curActiveIdx >= 0){
                 // 현재 패널 비활성화
                 panels[curActiveIdx].gameObject.SetActive(false); 
+
+                RectTransform view = panels[curActiveIdx].gameObject.GetComponent<RectTransform>();
+
+                float x = view.anchoredPosition.x;
+                view.anchoredPosition = new Vector3(x, 0, 0);
             }
 
             // 패널을 클릭된 타겟으로 업데이트
@@ -151,19 +172,33 @@ public class storeUI : MonoBehaviour
 
 
     public void SetStore(Emotions e){
+        int pt = GameManager.i.GetUser().getPoint(e);
         if(itemList.data[e] != null){
-            foreach(ItemInfo item in itemList.data[e]){
+            foreach(ItemInfo itemInfo in itemList.data[e]){
                 // 아이템 추가
                 GameObject clone = Instantiate(itemBox);
 
-                clone.transform.GetChild(0).GetComponent<Text>().text = item.itemName; // 이름
-                clone.transform.GetChild(1).GetComponent<Image>().sprite = ItemManager.i.GetCollection(e).getThumbnail(item.prefabName); // 썸네일
+                clone.transform.GetChild(0).GetComponent<Text>().text = itemInfo.itemName; // 이름
+                clone.transform.GetChild(1).GetComponent<Image>().sprite = ItemManager.i.GetCollection(e).getThumbnail(itemInfo.prefabName); // 썸네일
 
                 Color color;
                 ColorUtility.TryParseHtmlString(MyColor.getColor(e), out color); 
                 clone.transform.GetChild(2).GetComponent<Image>().color = color; // 색 설정 
 
-                clone.transform.GetChild(3).GetChild(1).GetComponent<Text>().text = item.cost.ToString();
+                Button costBtn = clone.transform.GetChild(3).gameObject.GetComponent<Button>();
+                // costBtn.transform.GetChild(0).GetComponent<Image>().color = color;
+                ColorBlock cb = costBtn.colors;
+                cb.normalColor = color;
+                costBtn.colors = cb;
+
+                costBtn.transform.GetChild(1).GetComponent<Text>().text = itemInfo.cost.ToString();
+
+                if(itemInfo.cost > pt){
+                    costBtn.interactable =false; 
+                }
+                costBtn.onClick.AddListener(()=>{
+                    BuyItem(itemInfo);
+                });
 
                 clone.transform.SetParent(panels[(int)e]); // 패널에 할당
                 clone.transform.localPosition = new Vector3(clone.transform.position.x, clone.transform.position.y, 0f);
@@ -178,6 +213,7 @@ public class storeUI : MonoBehaviour
 
 [System.Serializable]
 public class ItemInfo{
+    public string emotion;
     public string itemName;
     public string prefabName;
     public int cost;

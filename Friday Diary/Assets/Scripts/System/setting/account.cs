@@ -14,6 +14,12 @@ public class account : MonoBehaviour
         accountPopUp.SetActive(true);
     }
 
+    
+    public void onClickLogoutBtn()
+    {
+        GameManager.i.LogOut();
+    }
+
     public void onclickYesBTN()
     {
         Backend.i.DeleteUser( onDeletesuccess );
@@ -26,12 +32,14 @@ public class account : MonoBehaviour
 
     public void onDeletesuccess ( string x )
     { 
+        DataManager.i.DeleteGameData();
+
         accountPopUp.SetActive(false);
         deletePopUp.SetActive(true);
     }
 
     public void onclickConfirmBTN ()
     {
-        SceneManager.LoadScene("login");
+        LoadSceneManager.i.ToLogin();
     }
 }

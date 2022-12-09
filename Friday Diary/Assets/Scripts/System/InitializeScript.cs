@@ -10,13 +10,12 @@ public class InitializeScript : MonoBehaviour
     {
         AccessToken token = DataManager.i.LoadGameData();
         if(token==null){
-            SceneManager.LoadScene("Login");
+            LoadSceneManager.i.ToLogin();
         }else{
             Backend.i?.ReadUser(token.email, token.pw, (user)=>{
                 GameManager.i.SetUser(user);
-                SceneManager.LoadScene("Main");
+                LoadSceneManager.i.ToMain();
             }); 
         }    
     }
-    
 }
