@@ -63,11 +63,12 @@ public class HttpRequest : MonoBehaviour
         if (request.error == null) // 통신 성공
         {
             Response<T> res = JsonUtility.FromJson<Response<T>>(request.downloadHandler.text);
-             
+            Debug.Log(request.downloadHandler.text);
             if(res.message.Contains("fail")){ // 처리 실패
                 onFailed?.Invoke(res.message);
             }
             else{ // 처리 성공
+                Debug.Log(res.data);
                 onSuccess?.Invoke(res.data);
             }
         }

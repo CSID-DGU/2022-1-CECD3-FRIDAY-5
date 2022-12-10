@@ -51,6 +51,13 @@ public class Backend : MonoBehaviour
         HttpRequest.i.Post<User>(url+SubUrl.member_read.ToString(),DictToJson(data), onSuccess, AlertOnFailed);
     }
 
+    public void ReadUser(string id, string password, Action<User> onSuccess, Action<string> onFailed){
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("id",id);
+        data.Add("password", password);
+
+        HttpRequest.i.Post<User>(url+SubUrl.member_read.ToString(),DictToJson(data), onSuccess, onFailed);
+    }
     // 이메일 중복확인
     public void CheckValidEmail(string id, Action<string> onSuccess, Action<string> onFailed){
         Dictionary<string, string> data = new Dictionary<string, string>();

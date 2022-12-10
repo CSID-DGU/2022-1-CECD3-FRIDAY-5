@@ -15,6 +15,8 @@ public class InitializeScript : MonoBehaviour
             Backend.i?.ReadUser(token.email, token.pw, (user)=>{
                 GameManager.i.SetUser(user);
                 LoadSceneManager.i.ToMain();
+            },(message)=>{
+                LoadSceneManager.i.ToLogin();
             }); 
         }    
     }

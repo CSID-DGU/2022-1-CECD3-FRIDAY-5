@@ -17,11 +17,13 @@ public class StatisticDate // 통계 기간 클래스
     public StatisticDate(string y1,string y2, string m1, string m2, string d1, string d2)
     {
         
-        this.date_start = y1+m1+d1;
-        this.date_end = y2+m2+d2;
+        this.date_start = y1+m1.PadLeft(2,'0')+d1.PadLeft(2,'0');
+        this.date_end = y2+m2.PadLeft(2,'0')+d2.PadLeft(2,'0');
     }
 
 }
+
+[System.Serializable]
 
 public class EmotionStats 
 {
