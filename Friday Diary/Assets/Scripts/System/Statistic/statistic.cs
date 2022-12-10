@@ -8,7 +8,7 @@ using UnityEngine.Networking;
 [System.Serializable]
 public class StatisticDate // 통계 기간 클래스 
 {
-    public string id, date_start, date_end;
+    public string  date_start, date_end;
 
 
     public StatisticDate(){
@@ -16,7 +16,7 @@ public class StatisticDate // 통계 기간 클래스
 
     public StatisticDate(string y1,string y2, string m1, string m2, string d1, string d2)
     {
-        this.id = "testid";
+        
         this.date_start = y1+m1+d1;
         this.date_end = y2+m2+d2;
     }
@@ -25,20 +25,21 @@ public class StatisticDate // 통계 기간 클래스
 
 public class EmotionStats 
 {
-    public double happiness, sadness, angry, disgust, fear, surprise, neutral, sum;
+    public double angry, disgust, fear, happiness, neutral, sadness, sum, surprise;
 
     public EmotionStats(){
     }
 
-    public EmotionStats(double happy, double sad, double angry, double disgust, double fear, double surprise, double neutral)
+    public EmotionStats(double angry, double disgust, double fear, double happiness, double neutral, double sadness, double sum, double surprise)
     {
-        this.happiness = happy;
-        this.sadness = sad;
+        this.happiness = happiness;
+        this.sadness = sadness;
         this.angry = angry;
         this.disgust = disgust;
         this.fear = fear;
         this.surprise = surprise; 
         this.neutral = neutral;
+        this.sum = sum; 
     }
 }
 
@@ -60,9 +61,6 @@ public class statistic : MonoBehaviour
  
         //StartCoroutine( UnityWebRequestPOST(newDate)); 
         Backend.i.ReadStatistics(GameManager.i.GetUser().GetId(), newDate.date_start,newDate.date_end, OnReadStatSuccess);
-
-        // Emotion graphEmotion = new Emotion(0.3,0.2,0.1,0.1,0.1,0.2,0.6);
-        // graphVisualize(graphEmotion);
     }
 
     public void OnReadStatSuccess(EmotionStats res){
@@ -70,14 +68,14 @@ public class statistic : MonoBehaviour
         graphVisualize(res);
     }
     
-    public void graphVisualize(EmotionStats graphEmotion)
+    public void graphVisualize(EmotionStats res)
     {
-        i0.fillAmount = (float)graphEmotion.happiness;
-        i1.fillAmount = (float)graphEmotion.sadness;
-        i2.fillAmount = (float)graphEmotion.angry;
-        i3.fillAmount = (float)graphEmotion.disgust;
-        i4.fillAmount = (float)graphEmotion.fear;
-        i5.fillAmount = (float)graphEmotion.surprise;
+        i0.fillAmount = (float)res.happiness;
+        i1.fillAmount = (float)res.sadness;
+        i2.fillAmount = (float)res.angry;
+        i3.fillAmount = (float)res.disgust;
+        i4.fillAmount = (float)res.fear;
+        i5.fillAmount = (float)res.surprise;
     } 
     
     IEnumerator UnityWebRequestPOST(StatisticDate newDate)
