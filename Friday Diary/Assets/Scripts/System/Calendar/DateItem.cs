@@ -10,10 +10,11 @@ public class DateItem : MonoBehaviour
     [SerializeField]
     GameObject diaryHist;
     [SerializeField]
+    TextMeshProUGUI date;
+    [SerializeField]
     Text yearlabel;
     [SerializeField]
     Text monthlabel;
-    string date;
 
     [SerializeField]
     TextMeshProUGUI content;
@@ -43,6 +44,7 @@ public class DateItem : MonoBehaviour
         string month = monthlabel.text.Substring(0, monthlabel.text.Length - 1).PadLeft(2,'0');
 
         string targetDate = year+month+day;
+        date.text = year +"년 " + month+"월 " + day+"일";
         Backend.i.ReadDiary(userid, targetDate, (diary)=>{
                 diary.InitDiaryResult();
                 diaryHist.SetActive(true);

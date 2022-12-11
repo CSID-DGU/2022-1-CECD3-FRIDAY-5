@@ -5231,6 +5231,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diaryHist: {fileID: 5011528597605633981}
+  date: {fileID: 5011528598408827710}
   yearlabel: {fileID: 626739838}
   monthlabel: {fileID: 626739837}
   content: {fileID: 722071871}
