@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public enum GlobeMode{
     View = 0,
     Touched = 1,
@@ -22,6 +22,8 @@ public class GlobeController : MonoBehaviour
     float prevDist = 0f;       
     float touchDist = 0f;
     float duration = 0f;
+
+    public GameObject bottomtab;
 
     public bool isDragging = false;
 
@@ -105,6 +107,19 @@ public class GlobeController : MonoBehaviour
     public void ChangeMode(GlobeMode mode){
         if(currentMode != mode){
             currentMode =mode;
+        }
+
+        if(currentMode==GlobeMode.Plant){
+            Button[] tabs = bottomtab.transform.GetComponentsInChildren<Button>();
+            foreach(Button tab in tabs){
+                tab.interactable = false;
+            }
+        }
+        else{
+            Button[] tabs = bottomtab.transform.GetComponentsInChildren<Button>();
+            foreach(Button tab in tabs){
+                tab.interactable = true;
+            }
         }
     }
 }

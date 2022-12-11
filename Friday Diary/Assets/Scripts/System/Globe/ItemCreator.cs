@@ -117,6 +117,9 @@ public class ItemCreator : MonoBehaviour
                 clone.transform.parent = globe.transform;
 
                 Tree tree = new Tree();
+                tree.positionx = clone.transform.localPosition.x;
+                tree.positiony = clone.transform.localPosition.y;
+                tree.positionz = clone.transform.localPosition.z;
                 tree.relativePos = clone.transform.localPosition;
                 tree.rotate = clone.transform.rotation;
                 tree.scale = clone.transform.localScale;
@@ -127,7 +130,11 @@ public class ItemCreator : MonoBehaviour
                 GlobeController.instance.ChangeMode(GlobeMode.View);
 
                 // Debug.Log(JsonUtility.ToJson(tree, true));
-                
+                int remain = GameManager.i.GetUser().getPoint(itemInfo.emotion) - itemInfo.cost;
+                GameManager.i.GetUser().setPoint(itemInfo.emotion, remain);
+                Backend.i.CreateObject(itemInfo.emotion,itemInfo.cost,tree,(message)=>{
+                    GameManager.i.UpdateUser();
+                });
             }
 
         
