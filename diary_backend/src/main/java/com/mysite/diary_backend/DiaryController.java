@@ -104,6 +104,7 @@ public class DiaryController {
     @PostMapping("/member_create")
     public String member_create(@RequestBody VO vo) throws IOException
     {
+        System.out.println("server error test1234");
         String id= vo.getId();
         String name=vo.getName();
         String password=vo.getPassword();
@@ -139,6 +140,7 @@ public class DiaryController {
     @PostMapping("/member_read")
     public String member_read(@RequestBody VO vo) throws IOException
     {
+        System.out.println("server error test1234");
         String id= vo.getId();
         String password=vo.getPassword();
         Member testMember=this.MemberRepository.findByIdAndPassword(id,password);
@@ -171,6 +173,7 @@ public class DiaryController {
     @PostMapping("/member_update")
     public String member_update(@RequestBody VO vo) throws IOException
     {
+        System.out.println("server error test1234");
         String old_id=vo.getOld_id();
         String old_password=vo.getOld_password();
         String id= vo.getId();
@@ -214,7 +217,7 @@ public class DiaryController {
     @PostMapping("/member_delete")
     public String member_delete(@RequestBody VO vo) throws IOException
     {
-
+        System.out.println("server error test1234");
         String id= vo.getId();
         String password=vo.getPassword();
         Member testMember=this.MemberRepository.findByIdAndPassword(id,password);
@@ -244,11 +247,17 @@ public class DiaryController {
     @PostMapping("/diary_create")
     public String diary_create(@RequestBody VO vo) throws IOException
     {
+        System.out.println("server error test1234");
         String targetdate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         LocalDateTime targetdate_ = LocalDateTime.of(Integer.parseInt(targetdate.substring(0,4)),Integer.parseInt(targetdate.substring(4,6)),Integer.parseInt(targetdate.substring(6,8)),0,0);
 
+
         String id=vo.getId();
+        Optional<Member> targetmember = this.MemberRepository.findById(id);
+        String memberDatecreate=targetmember.get().getId()+targetdate;
+        System.out.println("memberdatecreate"+memberDatecreate);
         String text=vo.getText();
+        text= text.replaceAll("\n", "\\n");
         HttpUtils httpUtils = new HttpUtils();
         String url = "http://118.37.53.178:50512/Diary";
 
@@ -276,7 +285,6 @@ public class DiaryController {
             e.printStackTrace();
         }
 
-        Optional<Member> targetmember = this.MemberRepository.findById(id);
         Diary targetdiary=this.diaryRepository.findByMemberAndDatecreate(targetmember.get(),targetdate_);
 
         String strToFront="";
@@ -298,6 +306,7 @@ public class DiaryController {
             Diary diary=new Diary();
             Optional<Member> testMember = this.MemberRepository.findById(id);
             diary.setMember(testMember.get());
+            diary.setMemberDatecreate(memberDatecreate);
             diary.setDatecreate(targetdate_);
             diary.setText(text);
             diary.setHappiness(Double.parseDouble((result.get("happiness")).toString()));
@@ -335,6 +344,7 @@ public class DiaryController {
     @PostMapping("/diary_read")
     public String diary_read(@RequestBody VO vo) throws IOException
     {
+        System.out.println("server error test1234");
         String targetdate = vo.getTargetdate();
         LocalDateTime targetdate_ = LocalDateTime.of(Integer.parseInt(targetdate.substring(0,4)),Integer.parseInt(targetdate.substring(4,6)),Integer.parseInt(targetdate.substring(6,8)),0,0);
 
@@ -365,6 +375,7 @@ public class DiaryController {
         }
         return returnJSON;
     }
+
     //일기 update
     @PostMapping("/diary_update")
     public String diary_update(@RequestBody VO vo) throws IOException
@@ -376,7 +387,9 @@ public class DiaryController {
         String text=vo.getText();
 
         HttpUtils httpUtils = new HttpUtils();
+        System.out.println(text);
         String url = "http://118.37.53.178:50512/Diary";
+
 
         JSONObject result=new JSONObject();
         HttpURLConnection conn = null;
@@ -400,6 +413,7 @@ public class DiaryController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        System.out.println(result);
         String strToFront = "{\"sentence\" : \""+(result.get("sentence")).toString()+"\",\"neutral\" : \""
                 +(result.get("neutral")).toString()+"\",\"surprise\" : \""+(result.get("surprise")).toString()
                 +"\",\"angry\" : \""+(result.get("angry")).toString()+"\",\"happiness\" : \""+(result.get("happiness")).toString()
@@ -415,6 +429,7 @@ public class DiaryController {
 
         Diary targetdiary=this.diaryRepository.findByMemberAndDatecreate(targetmember.get(),targetdate_);
         targetdate_=targetdiary.getDatecreate();
+
         this.diaryRepository.delete(targetdiary);
 
 
@@ -431,6 +446,8 @@ public class DiaryController {
         diary.setSurprise(Double.parseDouble((result.get("surprise")).toString()));
         diary.setFear(Double.parseDouble((result.get("fear")).toString()));
         diary.setNeutral(Double.parseDouble((result.get("neutral")).toString()));
+        String memberDatecreate=targetmember.get().getId()+targetdate;
+        diary.setMemberDatecreate(memberDatecreate);
         this.diaryRepository.save(diary);
 
 
@@ -452,6 +469,7 @@ public class DiaryController {
     @PostMapping("/diary_delete")
     public String diary_delete(@RequestBody VO vo) throws IOException
     {
+        System.out.println("server error test1234");
         String targetdate = vo.getTargetdate();
         LocalDateTime targetdate_ = LocalDateTime.of(Integer.parseInt(targetdate.substring(0,4)),Integer.parseInt(targetdate.substring(4,6)),Integer.parseInt(targetdate.substring(6,8)),0,0);
 
@@ -479,6 +497,7 @@ public class DiaryController {
     @PostMapping("/tree_create")
     public String tree_create(@RequestBody VO vo) throws IOException
     {
+        System.out.println("server error test1234");
         String id= vo.getId();
         String cost_sentiment=vo.getCost_sentiment();
         Double cost_quantity=vo.getCost_quantity();
@@ -596,6 +615,7 @@ public class DiaryController {
     @PostMapping("/tree_read")
     public String tree_read(@RequestBody VO vo) throws IOException
     {
+        System.out.println("server error test1234");
         Integer treeid= vo.getTreeid();
         Tree target_tree=this.TreeRepository.findByTreeid(treeid);
         String returnJSON;
@@ -623,6 +643,7 @@ public class DiaryController {
     @PostMapping("/tree_update")
     public String tree_update(@RequestBody VO vo) throws IOException
     {
+        System.out.println("server error test1234");
         String id=vo.getId();
         Double old_positionx=vo.getOld_positionx();
         Double old_positiony=vo.getOld_positiony();
@@ -674,6 +695,7 @@ public class DiaryController {
     @PostMapping("/tree_delete")
     public String tree_delete(@RequestBody VO vo) throws IOException
     {
+        System.out.println("server error test1234");
         String id=vo.getId();
         Double positionx=vo.getPositionx();
         Double positiony=vo.getPositiony();
@@ -705,6 +727,7 @@ public class DiaryController {
     //친구 create
     @PostMapping("/friend_create")
     public String friend_create(@RequestBody VO vo) throws IOException {
+        System.out.println("server error test1234");
         String id=vo.getId();
         String friendid=vo.getFriendid();
 
@@ -747,6 +770,7 @@ public class DiaryController {
     @PostMapping("/friend_update")
     public String friend_update(@RequestBody VO vo) throws IOException
     {
+        System.out.println("server error test1234");
         String returnString="";
 
         return returnString;
@@ -755,6 +779,7 @@ public class DiaryController {
     @PostMapping("/friend_delete")
     public String friend_delete(@RequestBody VO vo) throws IOException
     {
+        System.out.println("server error test1234");
         String id=vo.getId();
         String friendid=vo.getFriendid();
 
@@ -791,6 +816,7 @@ public class DiaryController {
     @PostMapping("/statistic_read")
     public String statistic_read(@RequestBody VO vo) throws IOException
     {
+        System.out.println("server error test1234");
         String id=vo.getId();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         String startdate=vo.getDate_start();
@@ -840,17 +866,29 @@ public class DiaryController {
         fear/=Double.valueOf(sum);
         neutral/=Double.valueOf(sum);
         String returnJSON;
-        returnJSON= "{\"sum\" : \""+sum+"\",\"happiness\" : \""
+        returnJSON= "{"+"\"data\":{"+"\"sum\" : \""+sum+"\",\"happiness\" : \""
                 +happiness+"\",\"disgust\" : \""
                 +disgust+"\",\"sadness\" : \""
                 +sadness+"\",\"angry\" : \""
                 +angry+"\",\"surprise\" : \""
                 +surprise+"\",\"fear\" : \""
                 +fear+"\",\"neutral\" : \""
-                +neutral+"\",\"message\" : \""
+                +neutral+"\"},\"message\" : \""
                 +"statistic_read_success"
                 +"\"}";
 
+        if(sum==0){
+            returnJSON="{"+"\"data\":{"+"\"sum\" : \""+sum+"\",\"happiness\" : \""
+                    +0+"\",\"disgust\" : \""
+                    +0+"\",\"sadness\" : \""
+                    +0+"\",\"angry\" : \""
+                    +0+"\",\"surprise\" : \""
+                    +0+"\",\"fear\" : \""
+                    +0+"\",\"neutral\" : \""
+                    +0+"\"},\"message\" : \""
+                    +"statistic_read_success"
+                    +"\"}";
+        }
 
         return returnJSON;
     }
@@ -859,12 +897,14 @@ public class DiaryController {
     @PostMapping("/tree_list_read")
     public String tree_list_read(@RequestBody VO vo) throws IOException
     {
+        System.out.println("server error test1234");
         String returnString="{\"tree_list\" : [";
         String id=vo.getId();
         List<Tree> allTree=this.TreeRepository.findAll();
 
         for(Tree trees : allTree){
             returnString+="{\"treeid\" : \""+trees.getTreeid()+"\",";
+            returnString+="\"treename\" : \""+trees.getTreename()+"\",";
             returnString+="\"id\" : \""+trees.getMember().getId()+"\",";
             returnString+="\"positionx\" : \""+trees.getPositionx()+"\",";
             returnString+="\"positiony\" : \""+trees.getPositiony()+"\",";
@@ -881,6 +921,7 @@ public class DiaryController {
     @PostMapping("/friend_list_read")
     public String friend_list_read(@RequestBody VO vo) throws IOException
     {
+        System.out.println("server error test1234");
         String returnString="{\"friend_list\" : [";
         String id=vo.getId();
         List<Friend> allFriend=this.FriendRepository.findAll();

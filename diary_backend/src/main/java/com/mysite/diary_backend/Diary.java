@@ -15,10 +15,13 @@ import javax.persistence.ManyToOne;
 @Entity
 public class Diary {
 
+    @Id
+    private String memberDatecreate;
+
     @ManyToOne
     private Member member;
 
-    @Id
+    @Column()
     private LocalDateTime datecreate;
 
     @Column(columnDefinition = "TEXT")
