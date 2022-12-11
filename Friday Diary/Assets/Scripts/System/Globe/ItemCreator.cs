@@ -132,7 +132,7 @@ public class ItemCreator : MonoBehaviour
                 // Debug.Log(JsonUtility.ToJson(tree, true));
                 int remain = GameManager.i.GetUser().getPoint(itemInfo.emotion) - itemInfo.cost;
                 GameManager.i.GetUser().setPoint(itemInfo.emotion, remain);
-                Backend.i.CreateObject(itemInfo.emotion,itemInfo.cost,tree,(message)=>{
+                Backend.i.CreateObject(itemInfo.emotion,(double)itemInfo.cost/100.0f,tree,(message)=>{
                     GameManager.i.UpdateUser();
                 });
             }

@@ -147,7 +147,7 @@ public class Backend : MonoBehaviour
 
     
     // 나무 구매
-    public void CreateObject(string emotion, int cost, Tree tree, Action<string> onSuccess){
+    public void CreateObject(string emotion, double cost, Tree tree, Action<string> onSuccess){
         
         Dictionary<string, string> data = new Dictionary<string, string>();
         data.Add("id",GameManager.i.GetUser().GetId());
