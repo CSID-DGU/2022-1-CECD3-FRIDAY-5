@@ -15,9 +15,9 @@ public class TreeList {
 [System.Serializable]
 public class Tree {
     public string id;
-    // public double positionx;
-    // public double positiony;
-    // public double positionz;
+    public double positionx;
+    public double positiony;
+    public double positionz;
 
     public Vector3 relativePos;
     public Quaternion rotate;

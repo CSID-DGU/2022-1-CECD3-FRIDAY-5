@@ -41,6 +41,77 @@ public class User {
         return -1;
     }
 
+    public int getPoint(string em){
+        switch(em){
+            case "happiness":
+                return happinessPt;
+            case "sadness":
+                return sadnessPt;
+            case "angry":
+                return angryPt;
+            case "fear":
+                return fearPt;
+            case "surprise":
+                return surprisePt;
+            case "disgust":
+                return disgustPt;
+        }
+
+        return -1;
+    }
+
+    
+    public int setPoint(string em, int money){
+        switch(em){
+            case "happiness":
+                this.happinessmoney = money;
+               break;
+            case "sadness":
+                this.happinessmoney = money;
+               break;
+            case "angry":
+                this.happinessmoney = money;
+               break;
+            case "fear":
+                this.happinessmoney = money;
+               break;
+            case "surprise":
+                this.happinessmoney = money;
+               break;
+            case "disgust":
+                this.happinessmoney = money;
+               break;
+        }
+
+        return -1;
+    }
+    
+    public int setPoint(Emotions em, int money){
+        switch(em){
+            case Emotions.happiness:
+               this.happinessmoney = money;
+               break;
+            case Emotions.sadness:
+                this.sadnessmoney = money;
+                break;
+            case Emotions.angry:
+                this.angrymoney = money;
+                break;
+            case Emotions.fear:
+                this.fearmoney = money;
+                break;
+            case Emotions.surprise:
+                this.surprisemoney = money;
+                break;
+            case Emotions.disgust:
+                this.disgustmoney = money;
+                break;
+        }
+
+        return -1;
+    }
+
+
     public override string ToString(){
         return "\"id\": " + id + "\n\"passsword\": " + password + "\n\"name\": " + name + "\n\"happinessPt\": " + happinessPt + " \"disgustPt\": " + disgustPt +" \"sadnessPt\": " + sadnessPt +" \"angryPt\": " + angryPt +" \"surprisePt\": " + surprisePt +" \"fearPt\": " + fearPt;
     }

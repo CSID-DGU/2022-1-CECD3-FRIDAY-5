@@ -51,6 +51,13 @@ public class Backend : MonoBehaviour
         HttpRequest.i.Post<User>(url+SubUrl.member_read.ToString(),DictToJson(data), onSuccess, AlertOnFailed);
     }
 
+    public void ReadUser(string id, string password, Action<User> onSuccess, Action<string> onFailed){
+        Dictionary<string, string> data = new Dictionary<string, string>();
+        data.Add("id",id);
+        data.Add("password", password);
+
+        HttpRequest.i.Post<User>(url+SubUrl.member_read.ToString(),DictToJson(data), onSuccess, onFailed);
+    }
     // 이메일 중복확인
     public void CheckValidEmail(string id, Action<string> onSuccess, Action<string> onFailed){
         Dictionary<string, string> data = new Dictionary<string, string>();
@@ -106,7 +113,7 @@ public class Backend : MonoBehaviour
         Dictionary<string, string> data = new Dictionary<string, string>();
         data.Add("id",GameManager.i.GetUser().GetId());
         data.Add("targetdate", targetDate);
-
+        Debug.Log("확인- "+targetDate);
         HttpRequest.i.Post<Diary>(url+SubUrl.diary_read.ToString(), DictToJson(data), onSuccess, OnFailed);
     }
 
@@ -114,6 +121,7 @@ public class Backend : MonoBehaviour
         Dictionary<string, string> data = new Dictionary<string, string>();
         data.Add("id",GameManager.i.GetUser().GetId());
         data.Add("targetdate", targetDate);
+        Debug.Log(targetDate);
 
         HttpRequest.i.Post<Diary>(url+SubUrl.diary_read.ToString(), DictToJson(data), onSuccess, onFailed);
     }
@@ -139,19 +147,18 @@ public class Backend : MonoBehaviour
 
     
     // 나무 구매
-    public void CreateObject(string emotion, int cost, Tree tree,Action<string> onSuccess){
-        /*
+    public void CreateObject(string emotion, double cost, Tree tree, Action<string> onSuccess){
+        
         Dictionary<string, string> data = new Dictionary<string, string>();
         data.Add("id",GameManager.i.GetUser().GetId());
         data.Add("cost_sentiment",emotion);
         data.Add("cost_quantity",cost.ToString());
         data.Add("treename",tree.treeid);
-        data.Add("positionx",tree.getx().ToString());
-        data.Add("positiony",tree.gety().ToString());
-        data.Add("positionz",tree.getz().ToString());
+        data.Add("positionx",tree.positionx.ToString());
+        data.Add("positiony",tree.positiony.ToString());
+        data.Add("positionz",tree.positionz.ToString());
 
         HttpRequest.i.Post<string>(url+SubUrl.tree_create.ToString(), DictToJson(data), onSuccess, AlertOnFailed);
-        */
     }
 
     /*

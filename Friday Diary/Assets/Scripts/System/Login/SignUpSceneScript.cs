@@ -38,6 +38,7 @@ public class SignUpSceneScript : MonoBehaviour
     public void onSignUpSuccess(string message){
         UIPopUp.i.SetText(message, "가입에 성공했습니다. \n로그인해주세요.");
         UIPopUp.i.Show();
+        LoadSceneManager.i.ToLogin();
     }
 
     public void LoadInitializeScene(){

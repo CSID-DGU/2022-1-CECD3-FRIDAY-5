@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
             user = newUser;
             user.SetPoint();
             CalendarController._calendarInstance.ReloadPanel();
-            storeUI.i.ReloadStore();
+            storeUI.i.UpdateStore();
         });
     }
 
