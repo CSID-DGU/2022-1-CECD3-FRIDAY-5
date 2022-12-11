@@ -207,8 +207,25 @@ public class storeUI : MonoBehaviour
             }
         }
     }
-
+    public void UpdateStore(){
+        foreach(Emotions e in Enum.GetValues(typeof(Emotions))){
+            UpdateStore(e);
+        }
+    }
+    public void UpdateStore(Emotions e){
+        int pt = GameManager.i.GetUser().getPoint(e);
+        Button[] btns = panels[(int)e].GetComponentsInChildren<Button>();
+        foreach(Button btn in btns){
+            if(Int32.Parse(btn.transform.GetComponentInChildren<Text>().text) > (int)pt){
+                btn.interactable =false; 
+            }
+            else{
+                btn.interactable =true; 
+            }
+        }
+    }
 }
+
 
 
 [System.Serializable]

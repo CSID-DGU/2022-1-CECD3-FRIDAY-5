@@ -13586,18 +13586,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 567219441}
-        m_TargetAssemblyTypeName: storeUI, Assembly-CSharp
-        m_MethodName: ReloadStore
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1888599703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16536,7 +16524,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 0, y: 104.30603}
+  m_AnchoredPosition: {x: 0, y: 104.30591}
   m_SizeDelta: {x: 0, y: 208.611}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4749950609758327453
@@ -17042,7 +17030,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 104.31995}
+  m_AnchoredPosition: {x: 0, y: 104.32007}
   m_SizeDelta: {x: 0, y: -208.6}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &4818387572350348211
@@ -22193,7 +22181,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 948.3333, y: -564.1}
+  m_AnchoredPosition: {x: 948.3334, y: -564.1}
   m_SizeDelta: {x: 106.66671, y: 1068.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6507000803737115946
