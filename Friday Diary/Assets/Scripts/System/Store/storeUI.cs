@@ -208,6 +208,7 @@ public class storeUI : MonoBehaviour
         }
     }
     public void UpdateStore(){
+        Debug.Log("상점을 업데이트");
         foreach(Emotions e in Enum.GetValues(typeof(Emotions))){
             UpdateStore(e);
         }

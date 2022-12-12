@@ -121,7 +121,7 @@ public class Backend : MonoBehaviour
         Dictionary<string, string> data = new Dictionary<string, string>();
         data.Add("id",GameManager.i.GetUser().GetId());
         data.Add("targetdate", targetDate);
-        Debug.Log(targetDate);
+//        Debug.Log(targetDate);
 
         HttpRequest.i.Post<Diary>(url+SubUrl.diary_read.ToString(), DictToJson(data), onSuccess, onFailed);
     }
@@ -153,7 +153,7 @@ public class Backend : MonoBehaviour
         data.Add("id",GameManager.i.GetUser().GetId());
         data.Add("cost_sentiment",emotion);
         data.Add("cost_quantity",cost.ToString());
-        data.Add("treename",tree.treeid);
+        data.Add("treename",tree.treename);
         data.Add("positionx",tree.positionx.ToString());
         data.Add("positiony",tree.positiony.ToString());
         data.Add("positionz",tree.positionz.ToString());

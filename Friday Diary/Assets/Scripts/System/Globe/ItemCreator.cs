@@ -58,27 +58,34 @@ public class ItemCreator : MonoBehaviour
 
     private void Awake() {
         i = this;
-        SetGlobeObjects(); 
+        
     }
     
     // Update is called once per frame
     private void Start() {
         
         isActive = false;  
-        
-        
+        SetGlobeObjects(); 
         // zaxis = globe.transform.position - cam.transform.position;
     }
     public void SetGlobeObjects(){
-        GameManager.i.SetTreeList(()=>{
             if(GameManager.i.getTreeList()!=null){
+                Debug.Log("지구 초기화");
+                Debug.Log(GameManager.i.getTreeList().tree_list);
                 foreach(Tree t in GameManager.i.getTreeList().tree_list){
-                    GameObject prefab = ItemManager.i.GetCollection(t.emotion).getPrefab(t.treeid);
-                    placeTree(prefab,t.relativePos,t.rotate,t.scale);
+                    GameObject prefab = ItemManager.i.GetPrefab(t.treename);
+                    Debug.Log(t.treeid);
+                    Debug.Log(t.treename);
+                    Debug.Log(t.positionx);
+                    Debug.Log(prefab);
+                    if(prefab != null){
+                        placeTree(prefab,t);
+                    }
+                    
                 }
             }
-        });
-    }
+        }
+    
     public void SwitchPlaceMode(ItemInfo info){
         // Debug.Log(obj.name + "을 샀어요 ");
         
@@ -86,11 +93,11 @@ public class ItemCreator : MonoBehaviour
         Invoke("ToggleActive",0.5f);
     }
 
-    public void placeTree(GameObject item, Vector3 pos, Quaternion rotate, Vector3 scale){
+    public void placeTree(GameObject item,Tree t){
         // pos += globe.transform.position;
         
         Vector3 originalScale = item.transform.localScale;
-
+        Vector3 pos = new Vector3((float)t.positionx, (float)t.positiony,(float)t.positionz);
         Quaternion lookRotation = Quaternion.FromToRotation(Vector3.up, pos);
 
         GameObject clone = Instantiate(item, pos, lookRotation);   
@@ -120,12 +127,8 @@ public class ItemCreator : MonoBehaviour
                 tree.positionx = clone.transform.localPosition.x;
                 tree.positiony = clone.transform.localPosition.y;
                 tree.positionz = clone.transform.localPosition.z;
-                tree.relativePos = clone.transform.localPosition;
-                tree.rotate = clone.transform.rotation;
-                tree.scale = clone.transform.localScale;
-                tree.emotion = itemInfo.emotion;
-                tree.treeid = itemInfo.prefabName;
-                GameManager.i.AddTree(tree);
+                tree.treename = clone.name;
+                
 
                 GlobeController.instance.ChangeMode(GlobeMode.View);
 

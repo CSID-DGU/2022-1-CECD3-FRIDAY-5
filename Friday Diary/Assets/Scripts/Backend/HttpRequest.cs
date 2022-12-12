@@ -63,7 +63,14 @@ public class HttpRequest : MonoBehaviour
         if (request.error == null) // 통신 성공
         {
             Response<T> res = JsonUtility.FromJson<Response<T>>(request.downloadHandler.text);
-            if(res.message.Contains("fail")){ // 처리 실패
+            Debug.Log(request.downloadHandler.text);
+            if(url.Contains("tree_list")){
+                TreeList trees = JsonUtility.FromJson<TreeList>(request.downloadHandler.text);
+                 
+                GameManager.i.SetTreeList(trees);
+                onSuccess?.Invoke(res.data);
+            }
+            else if(res.message.Contains("fail")){ // 처리 실패
                 onFailed?.Invoke(res.message);
             }
             else{ // 처리 성공

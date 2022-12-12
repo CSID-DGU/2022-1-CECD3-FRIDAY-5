@@ -81,7 +81,7 @@ public class CalendarController : MonoBehaviour
                     if(GameManager.i.GetUser() != null){
                         
                         Backend.i.ReadDiary(GameManager.i.GetUser().GetId(), targetDate, (res)=>{
-                            Debug.Log(targetDate);
+                            // Debug.Log(targetDate);
                             if(!res.hasText()){
                                 return;
                             }

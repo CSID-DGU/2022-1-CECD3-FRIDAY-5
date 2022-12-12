@@ -14,7 +14,13 @@ public class InitializeScript : MonoBehaviour
         }else{
             Backend.i?.ReadUser(token.email, token.pw, (user)=>{
                 GameManager.i.SetUser(user);
-                LoadSceneManager.i.ToMain();
+
+                Backend.i?.ReadAllObjects(GameManager.i.GetUser().GetId(),(treeList)=>{
+
+                    // if(treeList != null) GameManager.i.SetTreeList(treeList);
+                    LoadSceneManager.i.ToMain();
+                });
+                
             },(message)=>{
                 LoadSceneManager.i.ToLogin();
             }); 
