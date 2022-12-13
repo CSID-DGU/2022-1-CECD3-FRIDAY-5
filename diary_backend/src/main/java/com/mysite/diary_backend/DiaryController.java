@@ -903,12 +903,15 @@ public class DiaryController {
         List<Tree> allTree=this.TreeRepository.findAll();
 
         for(Tree trees : allTree){
-            returnString+="{\"treeid\" : \""+trees.getTreeid()+"\",";
-            returnString+="\"treename\" : \""+trees.getTreename()+"\",";
-            returnString+="\"id\" : \""+trees.getMember().getId()+"\",";
-            returnString+="\"positionx\" : \""+trees.getPositionx()+"\",";
-            returnString+="\"positiony\" : \""+trees.getPositiony()+"\",";
-            returnString+="\"positionz\" : \""+trees.getPositionz()+"\"},";
+            if(trees.getMember().getId().equals(id)){
+                returnString+="{\"treeid\" : \""+trees.getTreeid()+"\",";
+                returnString+="\"treename\" : \""+trees.getTreename()+"\",";
+                returnString+="\"id\" : \""+trees.getMember().getId()+"\",";
+                returnString+="\"positionx\" : \""+trees.getPositionx()+"\",";
+                returnString+="\"positiony\" : \""+trees.getPositiony()+"\",";
+                returnString+="\"positionz\" : \""+trees.getPositionz()+"\"},";
+            }
+
         }
         returnString=returnString.substring(0,returnString.length()-1);
         returnString+="]}";
