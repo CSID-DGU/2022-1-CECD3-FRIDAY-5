@@ -58,14 +58,16 @@ public class storeUI : MonoBehaviour
             SetStore(e);
         }
 
+        SetResourcePanel((int)Emotions.happiness);
         curActivePanel = panels[(int)Emotions.happiness].gameObject;
         curActiveIdx = (int)Emotions.happiness;
-        SetResourcePanel((int)Emotions.happiness);
+        
     }
 
     public void ReloadStore(){
         foreach(Emotions e in Enum.GetValues(typeof(Emotions))){
             SetStore(e);
+            
         }
     }
 
@@ -101,6 +103,7 @@ public class storeUI : MonoBehaviour
     }
 
     public void SetResourcePanel(int target){
+        Debug.Log(target + "리소스 업데이트");
             Image icon = resources.transform.GetChild(0).GetComponent<Image>();
             icon.sprite = resourceIcon;
             
@@ -173,6 +176,7 @@ public class storeUI : MonoBehaviour
 
     public void SetStore(Emotions e){
         int pt = GameManager.i.GetUser().getPoint(e);
+        SetResourcePanel((int)e);
         if(itemList.data[e] != null){
             foreach(ItemInfo itemInfo in itemList.data[e]){
                 // 아이템 추가
@@ -208,10 +212,14 @@ public class storeUI : MonoBehaviour
         }
     }
     public void UpdateStore(){
+        Debug.Log("상점을 업데이트");
         foreach(Emotions e in Enum.GetValues(typeof(Emotions))){
             UpdateStore(e);
         }
+        SetResourcePanel(curActiveIdx);
+
     }
+
     public void UpdateStore(Emotions e){
         int pt = GameManager.i.GetUser().getPoint(e);
         Button[] btns = panels[(int)e].GetComponentsInChildren<Button>();

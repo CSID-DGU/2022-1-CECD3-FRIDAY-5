@@ -24,4 +24,15 @@ public class ItemManager : MonoBehaviour {
         Debug.Log((int)Enum.Parse(typeof(Emotions),em));
         return emotionItems[(int)Enum.Parse(typeof(Emotions),em)];
     }
+
+    public GameObject GetPrefab(string treename){
+        foreach(ItemPrefabCollection c in emotionItems){
+            foreach(GameObject prefab in c.prefabs){
+                if(prefab.name == treename){
+                    return prefab;
+                }
+            }
+        }
+        return null;
+    }
 }

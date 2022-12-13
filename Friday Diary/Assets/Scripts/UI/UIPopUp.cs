@@ -19,8 +19,6 @@ public class UIPopUp : MonoBehaviour
 
     private void Awake() {
         if(i==null) i = this;
-
-
     }
 
     private void Start() {

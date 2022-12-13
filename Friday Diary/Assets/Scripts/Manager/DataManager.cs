@@ -15,7 +15,6 @@ public class DataManager : MonoBehaviour
     }
 
     // --- 게임 데이터 파일이름 설정 ("원하는 이름(영문).json") --- //
-    string GameDataFileName = "AccessToken.json";
 
     // 불러오기
     public AccessToken LoadGameData()

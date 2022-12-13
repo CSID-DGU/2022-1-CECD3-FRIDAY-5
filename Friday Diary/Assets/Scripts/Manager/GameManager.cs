@@ -39,14 +39,11 @@ public class GameManager : MonoBehaviour
         escCnt = 0;
     }
     
-    public void AddTree(Tree tree){
-        if(treeList==null) treeList = new TreeList();
 
-        treeList.tree_list.Add(tree);
-    }
-    public void SetTreeList(Action onFinish){
-        treeList = DataManager.i.LoadGameData<TreeList>("/trees.json");
-        onFinish?.Invoke();
+    public void SetTreeList(TreeList trees){
+        Debug.Log("Set Tree List");
+        Debug.Log(trees.tree_list);
+        treeList = trees;
     }
 
     public TreeList getTreeList()=>treeList;
@@ -58,11 +55,14 @@ public class GameManager : MonoBehaviour
     }
 
     public void UpdateUser(){
+        Debug.Log("유저 정보 업데이트 시작");
+
         Backend.i.ReadUser(user.GetId(),user.GetPassword(), (newUser)=>{
+            Debug.Log("유저 정보 업데이트 성공");
             user = newUser;
             user.SetPoint();
+            // storeUI.i.UpdateStore();
             CalendarController._calendarInstance.ReloadPanel();
-            storeUI.i.UpdateStore();
         });
     }
 
@@ -86,11 +86,11 @@ public class GameManager : MonoBehaviour
 
     private void OnApplicationPause(bool pauseStatus) {
         if (pauseStatus){
-            DataManager.i.SaveGameData<TreeList>(treeList,"/trees.json");
+            // DataManager.i.SaveGameData<TreeList>(treeList,"/trees.json");
         }
     }
 
     private void OnApplicationQuit() {
-        DataManager.i.SaveGameData<TreeList>(treeList,"/trees.json");
+        // DataManager.i.SaveGameData<TreeList>(treeList,"/trees.json");
     }
 }

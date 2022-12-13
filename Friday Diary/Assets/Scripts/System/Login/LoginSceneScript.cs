@@ -24,7 +24,9 @@ public class LoginSceneScript : MonoBehaviour
     public void onLoginSuccess(User user){
         DataManager.i.SaveGameData(new AccessToken(user.GetId(), user.GetPassword()));
         GameManager.i.SetUser(user);
-
+        Backend.i?.ReadAllObjects(GameManager.i.GetUser().GetId(),(treeList)=>{
+                // do nothing
+            });
         LoadSceneManager.i.ToMain();
     }
 }
