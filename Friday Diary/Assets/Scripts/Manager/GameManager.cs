@@ -39,10 +39,6 @@ public class GameManager : MonoBehaviour
         escCnt = 0;
     }
     
-    public void SetTreeList(Action onFinish){
-        treeList = DataManager.i.LoadGameData<TreeList>("/trees.json");
-        onFinish?.Invoke();
-    }
 
     public void SetTreeList(TreeList trees){
         Debug.Log("Set Tree List");
@@ -65,7 +61,7 @@ public class GameManager : MonoBehaviour
             Debug.Log("유저 정보 업데이트 성공");
             user = newUser;
             user.SetPoint();
-            storeUI.i.UpdateStore();
+            // storeUI.i.UpdateStore();
             CalendarController._calendarInstance.ReloadPanel();
         });
     }
@@ -90,11 +86,11 @@ public class GameManager : MonoBehaviour
 
     private void OnApplicationPause(bool pauseStatus) {
         if (pauseStatus){
-            DataManager.i.SaveGameData<TreeList>(treeList,"/trees.json");
+            // DataManager.i.SaveGameData<TreeList>(treeList,"/trees.json");
         }
     }
 
     private void OnApplicationQuit() {
-        DataManager.i.SaveGameData<TreeList>(treeList,"/trees.json");
+        // DataManager.i.SaveGameData<TreeList>(treeList,"/trees.json");
     }
 }

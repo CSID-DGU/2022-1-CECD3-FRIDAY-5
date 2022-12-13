@@ -127,7 +127,7 @@ public class ItemCreator : MonoBehaviour
                 tree.positionx = clone.transform.localPosition.x;
                 tree.positiony = clone.transform.localPosition.y;
                 tree.positionz = clone.transform.localPosition.z;
-                tree.treename = clone.name;
+                tree.treename = itemInfo.prefabName;
                 
 
                 GlobeController.instance.ChangeMode(GlobeMode.View);

@@ -6,12 +6,10 @@ using UnityEngine.SceneManagement;
 public class InitializeScript : MonoBehaviour
 {
     // Start is called before the first frame update
+    
     void Start()
     {
-        AccessToken token = DataManager.i.LoadGameData();
-        if(token==null){
-            LoadSceneManager.i.ToLogin();
-        }else{
+        /*
             Backend.i?.ReadUser(token.email, token.pw, (user)=>{
                 GameManager.i.SetUser(user);
 
@@ -24,6 +22,8 @@ public class InitializeScript : MonoBehaviour
             },(message)=>{
                 LoadSceneManager.i.ToLogin();
             }); 
-        }    
-    }
+*/
+            LoadSceneManager.i.ToLogin();
+        }   
+        
 }
