@@ -25,31 +25,70 @@ public class Diary
         Emotions res = Emotions.happiness;
         double maxVal = happiness;
 
-        if(sadness > maxVal){
-            maxVal=sadness;
-            res = Emotions.sadness;
+        if(sadness >= maxVal){
+            if(sadness==maxVal){
+                if(Random.Range(0f,1f) > 0.5f){
+                    maxVal=sadness;
+                    res = Emotions.sadness;
+                }
+            }else{
+                maxVal=sadness;
+                    res = Emotions.sadness;
+            }
         }
         if(disgust > maxVal){
-            maxVal=disgust;
-            res = Emotions.disgust;
+            if(disgust==maxVal){
+                if(Random.Range(0f,1f) > 0.5f){
+                    maxVal=disgust;
+                    res = Emotions.disgust;
+                }
+            }
+            else{
+                maxVal=disgust;
+                res = Emotions.disgust;
+            }
         }
 
 
         if(angry > maxVal){
-            maxVal=angry;
-            res = Emotions.angry;
+            if(angry==maxVal){
+                if(Random.Range(0f,1f) > 0.5f){
+                    maxVal=angry;
+                    res = Emotions.angry;
+                }
+            }
+            else{
+                     maxVal=angry;
+                    res = Emotions.angry;               
+            }
         }
 
 
         if(surprise > maxVal){
-            maxVal=surprise;
-            res = Emotions.surprise;
+            if(surprise==maxVal){
+                if(Random.Range(0f,1f) > 0.5f){
+                    maxVal=surprise;
+                    res = Emotions.surprise;
+                }
+            }
+            else{
+                                    maxVal=surprise;
+                    res = Emotions.surprise;
+            }
         }
 
 
         if(fear > maxVal){
-            maxVal=fear;
-            res = Emotions.fear;
+            if(fear==maxVal){
+                if(Random.Range(0f,1f) > 0.5f){
+                    maxVal=fear;
+                    res = Emotions.fear;
+                }
+            }
+            else{
+                       maxVal=fear;
+                    res = Emotions.fear;             
+            }
         }
 
         return res;

@@ -36,8 +36,11 @@ public class UIPopUp : MonoBehaviour
     }
 
     public void SetText(string title, string text){
-        this.title.text = title;
-        this.content.text = text;
+        if(this.title != null){
+this.title.text = title;
+        this.content.text = text;           
+        }
+        
     }
 
     public void Show(){

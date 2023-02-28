@@ -42,6 +42,7 @@ public class GlobeController : MonoBehaviour
         nTouch = Input.touchCount;
 
         // 터치가 두 개이고, 두 터치중 하나라도 이동한다면 카메라의 fieldOfView를 조정합니다.
+        // 줌인/아웃
         if (nTouch == 2 && (Input.touches[0].phase == TouchPhase.Moved || Input.touches[1].phase == TouchPhase.Moved))
         {
 
@@ -61,45 +62,30 @@ public class GlobeController : MonoBehaviour
 
             prevDist = touchDist;
         }
-        else if (nTouch == 1)
+        // 드래그
+        else if (nTouch == 1 && Input.touches[0].phase == TouchPhase.Moved)
         {
-            if(Input.touches[0].phase == TouchPhase.Began){
-                duration = 0f;
-            }
 
-            else if(Input.touches[0].phase == TouchPhase.Moved){
-                duration += Time.deltaTime;
-                if(duration > 0.01f){
-                    Debug.Log(isDragging);
-                    isDragging = true;
-                    Ray ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
-                    RaycastHit hit;
-        
-                    if (Physics.Raycast(ray, out hit))
+            Ray ray = Camera.main.ScreenPointToRay(Input.touches[0].position);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform.tag == "Globe")
+                {
+                    Vector3 mPosDelta = Input.GetTouch(0).deltaPosition;
+                    if(Vector3.Dot(transform.up, Vector3.up)>=0)
                     {
-                        if (hit.transform.tag == "Globe")
-                        {
-                            Vector3 mPosDelta = Input.GetTouch(0).deltaPosition;
-                            if(Vector3.Dot(transform.up, Vector3.up)>=0)
-                            {
-                                transform.Rotate(transform.up, -Vector3.Dot(mPosDelta, Camera.main.transform.right)*0.05f,Space.World);
-                            }
-                            else
-                            {
-                                transform.Rotate(transform.up, Vector3.Dot(mPosDelta, Camera.main.transform.right)*0.05f,Space.World);
-                            }
-                            
-                            transform.Rotate(Camera.main.transform.right, Vector3.Dot(mPosDelta, Camera.main.transform.up)*0.05f,Space.World);
-                        }
+                        transform.Rotate(transform.up, -Vector3.Dot(mPosDelta, Camera.main.transform.right)*0.05f,Space.World);
                     }
+                    else
+                    {
+                        transform.Rotate(transform.up, Vector3.Dot(mPosDelta, Camera.main.transform.right)*0.05f,Space.World);
+                    }
+                    
+                    transform.Rotate(Camera.main.transform.right, Vector3.Dot(mPosDelta, Camera.main.transform.up)*0.05f,Space.World);
                 }
             }
-            else if(Input.touches[0].phase == TouchPhase.Ended){
-        //  Debug.Log("GLOBE CONTROLLER");
-
-                if(isDragging) isDragging = false;
-            }
-
         }
         
 }

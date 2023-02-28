@@ -6,6 +6,9 @@ public class ItemCreator : MonoBehaviour
 {
     public static ItemCreator i;
     public GameObject globe;
+        public GameObject ping;
+        public GameObject plantBtn;
+
 
     public GameObject activeAlert;
     Bounds bounds;
@@ -26,6 +29,8 @@ public class ItemCreator : MonoBehaviour
 
         if(isActive){
             activeAlert.SetActive(true);
+            ping.SetActive(true);
+            plantBtn.SetActive(true);
             GlobeController.instance.ChangeMode(GlobeMode.Plant);
         }
     }
@@ -38,11 +43,10 @@ public class ItemCreator : MonoBehaviour
     {
         if(isActive && Input.touchCount > 0 &&  Input.touches[0].phase == TouchPhase.Ended) 
         {
-            if(GlobeController.instance.isDragging) return;
-
             if(Input.touches[0].phase != TouchPhase.Ended) return;
             Vector3 touchPos = Input.GetTouch(0).position;
 
+            
 
             RaycastHit hitObj;
             Ray ray = Camera.main.ScreenPointToRay(touchPos);
@@ -50,7 +54,9 @@ public class ItemCreator : MonoBehaviour
             if(Physics.Raycast(ray, out hitObj, Mathf.Infinity))
             {
                 Debug.DrawRay(ray.origin, hitObj.point-ray.origin, Color.red, 5f);
-                ItemCreator.i.placeTree(hitObj.point);
+                placePing(hitObj.point);
+
+                // ItemCreator.i.placeTree(hitObj.point);
             }
  
         }
@@ -93,6 +99,15 @@ public class ItemCreator : MonoBehaviour
         Invoke("ToggleActive",0.5f);
     }
 
+    public void placePing(Vector3 position){
+        ping.transform.position = position;
+
+       // Vector3 direction = (globe.transform.position- position);
+        // Quaternion lookRotation = Quaternion.FromToRotation(Vector3.up, -1f*direction);
+
+        // ping.transform.rotation = lookRotation;
+    }
+
     public void placeTree(GameObject item,Tree t){
         // pos += globe.transform.position;
         
@@ -107,6 +122,9 @@ public class ItemCreator : MonoBehaviour
         clone.transform.localPosition = pos;
     }
 
+    public void initTree(){
+        placeTree(ping.transform.position);
+    }
     public void placeTree(Vector3 pos){
             if(itemInfo != null){
                 // bounds = item.GetComponent<MeshFilter>().sharedMesh.bounds;
@@ -146,6 +164,8 @@ public class ItemCreator : MonoBehaviour
             itemInfo = null;
             isActive = false;
             activeAlert.SetActive(false);
+            ping.SetActive(false);
+            plantBtn.SetActive(false);
     }
 
     bool isWater(Vector3 pos)
