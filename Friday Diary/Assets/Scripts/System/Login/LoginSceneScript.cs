@@ -17,11 +17,12 @@ public class LoginSceneScript : MonoBehaviour
     public void onLoginBtnclick()
     {
         if(idInput.text!="" && passwordInput.text !=""){
-            Backend.i?.ReadUser(idInput.text, passwordInput.text, onLoginSuccess); 
+            Backend.i?.ReadUser(idInput.text, Crypto.SHA256Hash(passwordInput.text), onLoginSuccess); 
         }
 
         // Backend.i?.ReadUser("test@gmail.com", "a123456", onLoginSuccess); 
     }
+
 
     public void onLoginSuccess(User user){
         DataManager.i.SaveGameData(new AccessToken(user.GetId(), user.GetPassword()));

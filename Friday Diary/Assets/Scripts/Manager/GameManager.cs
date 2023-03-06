@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     User user;
 
     TreeList treeList;
-    int escCnt = 0;
+    int escCnt = 0; // 뒤로가기 두번 누르면 종료되게 
     private void Awake() {
         if(i==null) i=this;
         escCnt = 0;

@@ -22,10 +22,15 @@ public class Diary
     }
 
     public Emotions GetMaxEmotionType(){
+
+        if(neutral == 1.0f){
+            return Emotions.neutral;
+        }
+
         Emotions res = Emotions.happiness;
         double maxVal = happiness;
 
-        if(sadness >= maxVal){
+        if(sadness != 0 && sadness >= maxVal){
             if(sadness==maxVal){
                 if(Random.Range(0f,1f) > 0.5f){
                     maxVal=sadness;
@@ -36,7 +41,7 @@ public class Diary
                     res = Emotions.sadness;
             }
         }
-        if(disgust > maxVal){
+        if(disgust != 0 && disgust > maxVal){
             if(disgust==maxVal){
                 if(Random.Range(0f,1f) > 0.5f){
                     maxVal=disgust;
@@ -50,7 +55,7 @@ public class Diary
         }
 
 
-        if(angry > maxVal){
+        if(angry != 0 && angry > maxVal){
             if(angry==maxVal){
                 if(Random.Range(0f,1f) > 0.5f){
                     maxVal=angry;
@@ -64,7 +69,7 @@ public class Diary
         }
 
 
-        if(surprise > maxVal){
+        if(surprise != 0 && surprise > maxVal){
             if(surprise==maxVal){
                 if(Random.Range(0f,1f) > 0.5f){
                     maxVal=surprise;
@@ -78,7 +83,7 @@ public class Diary
         }
 
 
-        if(fear > maxVal){
+        if(fear != 0 && fear > maxVal){
             if(fear==maxVal){
                 if(Random.Range(0f,1f) > 0.5f){
                     maxVal=fear;

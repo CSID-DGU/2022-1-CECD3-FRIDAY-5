@@ -51,6 +51,7 @@ public class CalendarController : MonoBehaviour
     }
 
     public void ReloadPanel(){
+        _dateTime = DateTime.Now;
         CreateCalendar();
     }
 
@@ -118,6 +119,10 @@ public class CalendarController : MonoBehaviour
                                     ColorUtility.TryParseHtmlString(MyColor.fear, out color);
                                     checkImg.color = color;                               
                                      break;
+                                case Emotions.neutral:
+                                    ColorUtility.TryParseHtmlString(MyColor.neutral, out color);
+                                    checkImg.color = color;  
+                                    break;
                             }
                         },(noDiary)=>{
                             checkImg.enabled = false;

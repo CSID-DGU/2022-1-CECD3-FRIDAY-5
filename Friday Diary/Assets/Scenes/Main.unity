@@ -10529,7 +10529,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC624\uB298\uC740 \uBB34\uC2A8 \uC77C\uC774 \uC788\uC5C8\uB098\uC694?"
+  m_text: "\uC624\uB298\uC740 \uBB34\uC2A8 \uC77C\uC774 \uC788\uC5C8\uB098\uC694?\n(
+    \uC628\uC810\uC73C\uB85C \uBB38\uC7A5\uC744 \uAD6C\uBD84\uD574\uC8FC\uC138\uC694!
+    )"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0cdf7ca5162b2d34aa3ad2aa800bc84f, type: 2}
   m_sharedMaterial: {fileID: 4813198848804631258, guid: 0cdf7ca5162b2d34aa3ad2aa800bc84f, type: 2}
@@ -10568,7 +10570,7 @@ MonoBehaviour:
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
-  m_lineSpacing: 0
+  m_lineSpacing: 9.72
   m_lineSpacingMax: 0
   m_paragraphSpacing: 0
   m_charWidthMaxAdj: 0

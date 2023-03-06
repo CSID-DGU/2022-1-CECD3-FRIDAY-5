@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
-using UnityEngine.SceneManagement;
-using UnityEngine.Networking;
-using System.Text;
+
 
 public class SignUpSceneScript : MonoBehaviour
 {
@@ -31,7 +29,7 @@ public class SignUpSceneScript : MonoBehaviour
 
         if(isNameValid && isEmailValid && isPwValid && isPwEqual)
         {
-            Backend.i.SignUp(email.text, password.text, username.text, onSignUpSuccess);
+            Backend.i.SignUp(email.text, Crypto.SHA256Hash(password.text), username.text, onSignUpSuccess);
         }
     }
 
@@ -133,5 +131,6 @@ public class SignUpSceneScript : MonoBehaviour
             eqIcon.SetActive(false);
         }       
     }
+
 
 }

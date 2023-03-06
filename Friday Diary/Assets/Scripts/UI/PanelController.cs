@@ -40,6 +40,7 @@ public class PanelController : MonoBehaviour
 
     public void OnCalendarBtnClick(){
         if(calendarPanel!=null && curActivePanel != calendarPanel){     
+            CalendarController._calendarInstance.ReloadPanel();
             curActivePanel.SetActive(false);    
             calendarPanel.SetActive(true);
             curActivePanel = calendarPanel;
